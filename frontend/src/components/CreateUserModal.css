@@ -1,0 +1,249 @@
+/* Create User Modal Specific Styles */
+.create-user-modal {
+  max-width: 800px !important;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.create-user-modal .modal-body {
+  padding: 0;
+}
+
+.form-section {
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 2rem;
+}
+
+.form-section:last-of-type {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.form-section .section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+  padding: 1rem 2rem 0;
+  border-bottom: 2px solid #3b82f6;
+  background-color: #f8fafc;
+  margin-left: -2rem;
+  margin-right: -2rem;
+  margin-top: -1rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  padding: 0 2rem;
+}
+
+.documents-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  padding: 0 2rem;
+}
+
+.document-item {
+  padding: 0.75rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  background-color: #f9fafb;
+  transition: all 0.2s ease;
+}
+
+.document-item:hover {
+  background-color: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  cursor: pointer;
+  margin: 0;
+}
+
+.checkbox-input {
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid #d1d5db;
+  border-radius: 0.25rem;
+  background-color: #ffffff;
+  cursor: pointer;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.checkbox-input:checked {
+  background-color: #3b82f6;
+  border-color: #3b82f6;
+}
+
+.checkbox-text {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: #374151;
+  margin: 0;
+}
+
+.footer-section {
+  background-color: #f8fafc;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.5rem;
+  margin-top: 2rem;
+}
+
+.footer-content {
+  padding: 2rem;
+}
+
+.footer-company {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.footer-details {
+  margin-bottom: 1.5rem;
+}
+
+.footer-details p {
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+  color: #374151;
+}
+
+.footer-notes {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.footer-notes p {
+  margin: 0.75rem 0;
+  font-size: 0.85rem;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+.footer-notes strong {
+  color: #374151;
+}
+
+/* Form styling improvements for create modal */
+.create-user-modal .form-input,
+.create-user-modal .form-select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.create-user-modal .form-input:focus,
+.create-user-modal .form-select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.create-user-modal .form-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 0.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .create-user-modal {
+    max-width: 95vw !important;
+    max-height: 95vh;
+  }
+  
+  .form-grid {
+    grid-template-columns: 1fr;
+    padding: 0 1rem;
+  }
+  
+  .documents-grid {
+    padding: 0 1rem;
+  }
+  
+  .form-section .section-title {
+    font-size: 1.125rem;
+    padding: 0.75rem 1rem 0;
+    margin-left: -1rem;
+    margin-right: -1rem;
+  }
+}
+
+/* Category checkbox grid styles */
+.categories-checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.category-checkbox-item {
+  padding: 0.75rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  background-color: #f9fafb;
+  transition: all 0.2s ease;
+}
+
+.category-checkbox-item:hover {
+  background-color: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+.category-checkbox-item .checkbox-label {
+  gap: 0.5rem;
+}
+
+.category-checkbox-item .checkbox-input:checked + .checkbox-text {
+  color: #1f2937;
+  font-weight: 500;
+}
+
+/* Category tags for display */
+.categories-display {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  max-width: 150px;
+}
+
+.category-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  color: #374151;
+  white-space: nowrap;
+}
+
+/* Responsive adjustments for categories */
+@media (max-width: 768px) {
+  .categories-checkbox-grid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  
+  .categories-display {
+    max-width: none;
+  }
+  
+  .category-tag {
+    font-size: 0.7rem;
+  }
+}

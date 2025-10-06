@@ -1,0 +1,780 @@
+
+> etendering-backend@1.0.0 dev
+> nodemon server.js
+
+[33m[nodemon] 3.1.10[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching path(s): *.*[39m
+[33m[nodemon] watching extensions: js,mjs,cjs,json[39m
+[32m[nodemon] starting `node server.js`[39m
+[DB Health] Starting database connection monitoring...
+[32minfo[39m: Server running on port 3001 in development mode {"service":"etendering-backend","timestamp":"2025-09-20T15:49:21.778Z"}
+[INFO] PostgreSQL connected successfully
+[INFO] Database query test successful
+[32minfo[39m: Email service connected successfully {"service":"etendering-backend","timestamp":"2025-09-20T15:49:23.278Z"}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T15:50:19.422Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T15:51:19.425Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T15:52:19.427Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T15:53:19.439Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T15:54:19.450Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T15:55:19.455Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T15:56:19.463Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T15:57:19.472Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T15:58:19.479Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T15:59:19.491Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T16:00:19.505Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T16:01:19.508Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T16:02:19.511Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T16:03:19.516Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T16:04:19.522Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T16:05:19.532Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T16:06:19.543Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T16:07:19.556Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T16:08:19.569Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T16:09:19.582Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T16:10:19.589Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T16:11:19.596Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T16:12:19.604Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T16:13:19.618Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T16:14:19.619Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T16:15:19.624Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T16:16:19.631Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T16:17:19.633Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T16:18:19.633Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T16:19:19.635Z',
+  type: 'single_connection'
+}
+[31merror[39m: Error Expected property name or '}' in JSON at position 2 (line 1 column 3) {"ip":"::1","method":"POST","service":"etendering-backend","stack":"SyntaxError: Expected property name or '}' in JSON at position 2 (line 1 column 3)\n    at JSON.parse (<anonymous>)\n    at parse (C:\\Users\\Talal Khan\\etendering portal\\backend\\node_modules\\body-parser\\lib\\types\\json.js:92:19)\n    at C:\\Users\\Talal Khan\\etendering portal\\backend\\node_modules\\body-parser\\lib\\read.js:128:18\n    at AsyncResource.runInAsyncScope (node:async_hooks:211:14)\n    at invokeCallback (C:\\Users\\Talal Khan\\etendering portal\\backend\\node_modules\\raw-body\\index.js:238:16)\n    at done (C:\\Users\\Talal Khan\\etendering portal\\backend\\node_modules\\raw-body\\index.js:227:7)\n    at IncomingMessage.onEnd (C:\\Users\\Talal Khan\\etendering portal\\backend\\node_modules\\raw-body\\index.js:287:7)\n    at IncomingMessage.emit (node:events:518:28)\n    at IncomingMessage.emit (node:domain:489:12)\n    at endReadableNT (node:internal/streams/readable:1698:12)","timestamp":"2025-09-20T16:19:33.021Z","url":"/api/auth/login"}
+[31merror[39m: Error Expected property name or '}' in JSON at position 2 (line 1 column 3) {"ip":"::1","method":"POST","service":"etendering-backend","stack":"SyntaxError: Expected property name or '}' in JSON at position 2 (line 1 column 3)\n    at JSON.parse (<anonymous>)\n    at parse (C:\\Users\\Talal Khan\\etendering portal\\backend\\node_modules\\body-parser\\lib\\types\\json.js:92:19)\n    at C:\\Users\\Talal Khan\\etendering portal\\backend\\node_modules\\body-parser\\lib\\read.js:128:18\n    at AsyncResource.runInAsyncScope (node:async_hooks:211:14)\n    at invokeCallback (C:\\Users\\Talal Khan\\etendering portal\\backend\\node_modules\\raw-body\\index.js:238:16)\n    at done (C:\\Users\\Talal Khan\\etendering portal\\backend\\node_modules\\raw-body\\index.js:227:7)\n    at IncomingMessage.onEnd (C:\\Users\\Talal Khan\\etendering portal\\backend\\node_modules\\raw-body\\index.js:287:7)\n    at IncomingMessage.emit (node:events:518:28)\n    at IncomingMessage.emit (node:domain:489:12)\n    at endReadableNT (node:internal/streams/readable:1698:12)","timestamp":"2025-09-20T16:19:45.230Z","url":"/api/auth/login"}
+[DEBUG] Query executed in 21ms: SELECT * FROM users WHERE email = $1 OR username = $1...
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T16:20:19.649Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T16:21:19.653Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T16:22:19.668Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T16:23:19.669Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T16:24:19.678Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T16:25:19.683Z',
+  type: 'single_connection'
+}
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+[DB Health] Starting database connection monitoring...
+[31merror[39m: Port 3001 is already in use. Please check if another instance is running or use a different port. {"service":"etendering-backend","timestamp":"2025-09-20T16:25:50.401Z"}
+[INFO] Gracefully shutting down database connection...
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+[DB Health] Starting database connection monitoring...
+[32minfo[39m: Server running on port 3001 in development mode {"service":"etendering-backend","timestamp":"2025-09-20T16:40:07.124Z"}
+[INFO] PostgreSQL connected successfully
+[INFO] Database query test successful
+[32minfo[39m: Email service connected successfully {"service":"etendering-backend","timestamp":"2025-09-20T16:40:08.469Z"}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T16:41:04.897Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T16:42:04.907Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T16:43:04.912Z',
+  type: 'single_connection'
+}
+[DEBUG] Query executed in 27ms: SELECT * FROM users WHERE email = $1 OR username = $1...
+[32minfo[39m: User logged in: mt123321123123@admin.com {"service":"etendering-backend","timestamp":"2025-09-20T16:43:26.151Z"}
+[DEBUG] Query executed in 12ms: SELECT category FROM user_categories WHERE user_id = $1 ORDER BY category...
+[DEBUG] Query executed in 2ms: SELECT * FROM users WHERE id = $1...
+[DEBUG] Query executed in 1ms: SELECT category FROM user_categories WHERE user_id = $1 ORDER BY category...
+[DEBUG] Query executed in 4ms: SELECT * FROM users WHERE id = $1...
+Fetching dashboard statistics...
+[DEBUG] Query executed in 2ms: 
+      SELECT 
+        COUNT(*) as total_users,
+        COUNT(CASE WHEN role = 'vendor' THEN 1 END) ...
+User stats: { total_users: '30', vendors: '23', buyers: '1', active_users: '30' }
+[DEBUG] Query executed in 19ms: 
+      SELECT 
+        COUNT(*) as total_tenders,
+        COUNT(CASE WHEN status = 'open' THEN 1 END...
+Tender stats: {
+  total_tenders: '13',
+  open_tenders: '11',
+  closed_tenders: '2',
+  active_tenders: '11'
+}
+[DEBUG] Query executed in 14ms: 
+      SELECT 
+        COUNT(*) as total_bids,
+        COUNT(CASE WHEN status = 'pending' THEN 1 END...
+Bid stats: {
+  total_bids: '3',
+  pending_bids: '1',
+  accepted_bids: '2',
+  rejected_bids: '0',
+  total_value: '25200.00'
+}
+[DEBUG] Query executed in 13ms: 
+      SELECT t.id, t.title, t.description, t.status, t.created_at, c.name as category_name
+      FR...
+Recent tenders count: 5
+[DEBUG] Query executed in 5ms: 
+      SELECT b.id, b.amount, b.status, b.submitted_at, 
+             t.title as tender_title, 
+    ...
+Recent bids count: 3
+Dashboard response prepared successfully
+[DEBUG] Query executed in 1ms: SELECT * FROM users WHERE id = $1...
+Fetching dashboard statistics...
+[DEBUG] Query executed in 1ms: 
+      SELECT 
+        COUNT(*) as total_users,
+        COUNT(CASE WHEN role = 'vendor' THEN 1 END) ...
+User stats: { total_users: '30', vendors: '23', buyers: '1', active_users: '30' }
+[DEBUG] Query executed in 2ms: 
+      SELECT 
+        COUNT(*) as total_tenders,
+        COUNT(CASE WHEN status = 'open' THEN 1 END...
+Tender stats: {
+  total_tenders: '13',
+  open_tenders: '11',
+  closed_tenders: '2',
+  active_tenders: '11'
+}
+[DEBUG] Query executed in 2ms: 
+      SELECT 
+        COUNT(*) as total_bids,
+        COUNT(CASE WHEN status = 'pending' THEN 1 END...
+Bid stats: {
+  total_bids: '3',
+  pending_bids: '1',
+  accepted_bids: '2',
+  rejected_bids: '0',
+  total_value: '25200.00'
+}
+[DEBUG] Query executed in 2ms: 
+      SELECT t.id, t.title, t.description, t.status, t.created_at, c.name as category_name
+      FR...
+Recent tenders count: 5
+[DEBUG] Query executed in 2ms: 
+      SELECT b.id, b.amount, b.status, b.submitted_at, 
+             t.title as tender_title, 
+    ...
+Recent bids count: 3
+Dashboard response prepared successfully
+[DEBUG] Query executed in 3ms: SELECT * FROM users WHERE id = $1...
+Fetching dashboard statistics...
+[DEBUG] Query executed in 3ms: 
+      SELECT 
+        COUNT(*) as total_users,
+        COUNT(CASE WHEN role = 'vendor' THEN 1 END) ...
+User stats: { total_users: '30', vendors: '23', buyers: '1', active_users: '30' }
+[DEBUG] Query executed in 1ms: 
+      SELECT 
+        COUNT(*) as total_tenders,
+        COUNT(CASE WHEN status = 'open' THEN 1 END...
+Tender stats: {
+  total_tenders: '13',
+  open_tenders: '11',
+  closed_tenders: '2',
+  active_tenders: '11'
+}
+[DEBUG] Query executed in 2ms: 
+      SELECT 
+        COUNT(*) as total_bids,
+        COUNT(CASE WHEN status = 'pending' THEN 1 END...
+Bid stats: {
+  total_bids: '3',
+  pending_bids: '1',
+  accepted_bids: '2',
+  rejected_bids: '0',
+  total_value: '25200.00'
+}
+[DEBUG] Query executed in 2ms: 
+      SELECT t.id, t.title, t.description, t.status, t.created_at, c.name as category_name
+      FR...
+Recent tenders count: 5
+[DEBUG] Query executed in 3ms: 
+      SELECT b.id, b.amount, b.status, b.submitted_at, 
+             t.title as tender_title, 
+    ...
+Recent bids count: 3
+Dashboard response prepared successfully
+[DEBUG] Query executed in 2ms: SELECT * FROM users WHERE id = $1...
+Fetching dashboard statistics...
+[DEBUG] Query executed in 2ms: 
+      SELECT 
+        COUNT(*) as total_users,
+        COUNT(CASE WHEN role = 'vendor' THEN 1 END) ...
+User stats: { total_users: '30', vendors: '23', buyers: '1', active_users: '30' }
+[DEBUG] Query executed in 2ms: 
+      SELECT 
+        COUNT(*) as total_tenders,
+        COUNT(CASE WHEN status = 'open' THEN 1 END...
+Tender stats: {
+  total_tenders: '13',
+  open_tenders: '11',
+  closed_tenders: '2',
+  active_tenders: '11'
+}
+[DEBUG] Query executed in 2ms: 
+      SELECT 
+        COUNT(*) as total_bids,
+        COUNT(CASE WHEN status = 'pending' THEN 1 END...
+Bid stats: {
+  total_bids: '3',
+  pending_bids: '1',
+  accepted_bids: '2',
+  rejected_bids: '0',
+  total_value: '25200.00'
+}
+[DEBUG] Query executed in 2ms: 
+      SELECT t.id, t.title, t.description, t.status, t.created_at, c.name as category_name
+      FR...
+Recent tenders count: 5
+[DEBUG] Query executed in 3ms: 
+      SELECT b.id, b.amount, b.status, b.submitted_at, 
+             t.title as tender_title, 
+    ...
+Recent bids count: 3
+Dashboard response prepared successfully
+[DEBUG] Query executed in 3ms: SELECT * FROM users WHERE id = $1...
+[DEBUG] Query executed in 4ms: SELECT category FROM user_categories WHERE user_id = $1 ORDER BY category...
+[DEBUG] Query executed in 2ms: SELECT * FROM users WHERE id = $1...
+[DEBUG] Query executed in 2ms: SELECT category FROM user_categories WHERE user_id = $1 ORDER BY category...
+[DEBUG] Query executed in 2ms: SELECT * FROM users WHERE id = $1...
+Fetching dashboard statistics...
+[DEBUG] Query executed in 2ms: 
+      SELECT 
+        COUNT(*) as total_users,
+        COUNT(CASE WHEN role = 'vendor' THEN 1 END) ...
+User stats: { total_users: '30', vendors: '23', buyers: '1', active_users: '30' }
+[DEBUG] Query executed in 2ms: 
+      SELECT 
+        COUNT(*) as total_tenders,
+        COUNT(CASE WHEN status = 'open' THEN 1 END...
+Tender stats: {
+  total_tenders: '13',
+  open_tenders: '11',
+  closed_tenders: '2',
+  active_tenders: '11'
+}
+[DEBUG] Query executed in 2ms: 
+      SELECT 
+        COUNT(*) as total_bids,
+        COUNT(CASE WHEN status = 'pending' THEN 1 END...
+Bid stats: {
+  total_bids: '3',
+  pending_bids: '1',
+  accepted_bids: '2',
+  rejected_bids: '0',
+  total_value: '25200.00'
+}
+[DEBUG] Query executed in 2ms: 
+      SELECT t.id, t.title, t.description, t.status, t.created_at, c.name as category_name
+      FR...
+Recent tenders count: 5
+[DEBUG] Query executed in 3ms: 
+      SELECT b.id, b.amount, b.status, b.submitted_at, 
+             t.title as tender_title, 
+    ...
+Recent bids count: 3
+Dashboard response prepared successfully
+[DEBUG] Query executed in 3ms: SELECT * FROM users WHERE id = $1...
+Fetching dashboard statistics...
+[DEBUG] Query executed in 3ms: 
+      SELECT 
+        COUNT(*) as total_users,
+        COUNT(CASE WHEN role = 'vendor' THEN 1 END) ...
+User stats: { total_users: '30', vendors: '23', buyers: '1', active_users: '30' }
+[DEBUG] Query executed in 2ms: 
+      SELECT 
+        COUNT(*) as total_tenders,
+        COUNT(CASE WHEN status = 'open' THEN 1 END...
+Tender stats: {
+  total_tenders: '13',
+  open_tenders: '11',
+  closed_tenders: '2',
+  active_tenders: '11'
+}
+[DEBUG] Query executed in 5ms: 
+      SELECT 
+        COUNT(*) as total_bids,
+        COUNT(CASE WHEN status = 'pending' THEN 1 END...
+Bid stats: {
+  total_bids: '3',
+  pending_bids: '1',
+  accepted_bids: '2',
+  rejected_bids: '0',
+  total_value: '25200.00'
+}
+[DEBUG] Query executed in 2ms: 
+      SELECT t.id, t.title, t.description, t.status, t.created_at, c.name as category_name
+      FR...
+Recent tenders count: 5
+[DEBUG] Query executed in 9ms: 
+      SELECT b.id, b.amount, b.status, b.submitted_at, 
+             t.title as tender_title, 
+    ...
+Recent bids count: 3
+Dashboard response prepared successfully
+[DEBUG] Query executed in 3ms: SELECT * FROM users WHERE id = $1...
+[DEBUG] Query executed in 2ms: SELECT category FROM user_categories WHERE user_id = $1 ORDER BY category...
+[DEBUG] Query executed in 2ms: SELECT * FROM users WHERE id = $1...
+[DEBUG] Query executed in 1ms: SELECT category FROM user_categories WHERE user_id = $1 ORDER BY category...
+[DEBUG] Query executed in 2ms: SELECT * FROM users WHERE id = $1...
+Fetching dashboard statistics...
+[DEBUG] Query executed in 1ms: 
+      SELECT 
+        COUNT(*) as total_users,
+        COUNT(CASE WHEN role = 'vendor' THEN 1 END) ...
+User stats: { total_users: '30', vendors: '23', buyers: '1', active_users: '30' }
+[DEBUG] Query executed in 3ms: 
+      SELECT 
+        COUNT(*) as total_tenders,
+        COUNT(CASE WHEN status = 'open' THEN 1 END...
+Tender stats: {
+  total_tenders: '13',
+  open_tenders: '11',
+  closed_tenders: '2',
+  active_tenders: '11'
+}
+[DEBUG] Query executed in 1ms: 
+      SELECT 
+        COUNT(*) as total_bids,
+        COUNT(CASE WHEN status = 'pending' THEN 1 END...
+Bid stats: {
+  total_bids: '3',
+  pending_bids: '1',
+  accepted_bids: '2',
+  rejected_bids: '0',
+  total_value: '25200.00'
+}
+[DEBUG] Query executed in 2ms: 
+      SELECT t.id, t.title, t.description, t.status, t.created_at, c.name as category_name
+      FR...
+Recent tenders count: 5
+[DEBUG] Query executed in 3ms: 
+      SELECT b.id, b.amount, b.status, b.submitted_at, 
+             t.title as tender_title, 
+    ...
+Recent bids count: 3
+Dashboard response prepared successfully
+[DEBUG] Query executed in 1ms: SELECT * FROM users WHERE id = $1...
+Fetching dashboard statistics...
+[DEBUG] Query executed in 2ms: 
+      SELECT 
+        COUNT(*) as total_users,
+        COUNT(CASE WHEN role = 'vendor' THEN 1 END) ...
+User stats: { total_users: '30', vendors: '23', buyers: '1', active_users: '30' }
+[DEBUG] Query executed in 2ms: 
+      SELECT 
+        COUNT(*) as total_tenders,
+        COUNT(CASE WHEN status = 'open' THEN 1 END...
+Tender stats: {
+  total_tenders: '13',
+  open_tenders: '11',
+  closed_tenders: '2',
+  active_tenders: '11'
+}
+[DEBUG] Query executed in 2ms: 
+      SELECT 
+        COUNT(*) as total_bids,
+        COUNT(CASE WHEN status = 'pending' THEN 1 END...
+Bid stats: {
+  total_bids: '3',
+  pending_bids: '1',
+  accepted_bids: '2',
+  rejected_bids: '0',
+  total_value: '25200.00'
+}
+[DEBUG] Query executed in 2ms: 
+      SELECT t.id, t.title, t.description, t.status, t.created_at, c.name as category_name
+      FR...
+Recent tenders count: 5
+[DEBUG] Query executed in 4ms: 
+      SELECT b.id, b.amount, b.status, b.submitted_at, 
+             t.title as tender_title, 
+    ...
+Recent bids count: 3
+Dashboard response prepared successfully
+[DEBUG] Query executed in 2ms: SELECT * FROM users WHERE id = $1...
+[DEBUG] Query executed in 2ms: SELECT category FROM user_categories WHERE user_id = $1 ORDER BY category...
+[DEBUG] Query executed in 2ms: SELECT * FROM users WHERE id = $1...
+[DEBUG] Query executed in 2ms: SELECT category FROM user_categories WHERE user_id = $1 ORDER BY category...
+[DEBUG] Query executed in 2ms: SELECT * FROM users WHERE id = $1...
+Fetching dashboard statistics...
+[DEBUG] Query executed in 3ms: 
+      SELECT 
+        COUNT(*) as total_users,
+        COUNT(CASE WHEN role = 'vendor' THEN 1 END) ...
+User stats: { total_users: '30', vendors: '23', buyers: '1', active_users: '30' }
+[DEBUG] Query executed in 2ms: 
+      SELECT 
+        COUNT(*) as total_tenders,
+        COUNT(CASE WHEN status = 'open' THEN 1 END...
+Tender stats: {
+  total_tenders: '13',
+  open_tenders: '11',
+  closed_tenders: '2',
+  active_tenders: '11'
+}
+[DEBUG] Query executed in 1ms: 
+      SELECT 
+        COUNT(*) as total_bids,
+        COUNT(CASE WHEN status = 'pending' THEN 1 END...
+Bid stats: {
+  total_bids: '3',
+  pending_bids: '1',
+  accepted_bids: '2',
+  rejected_bids: '0',
+  total_value: '25200.00'
+}
+[DEBUG] Query executed in 2ms: 
+      SELECT t.id, t.title, t.description, t.status, t.created_at, c.name as category_name
+      FR...
+Recent tenders count: 5
+[DEBUG] Query executed in 4ms: 
+      SELECT b.id, b.amount, b.status, b.submitted_at, 
+             t.title as tender_title, 
+    ...
+Recent bids count: 3
+Dashboard response prepared successfully
+[DEBUG] Query executed in 2ms: SELECT * FROM users WHERE id = $1...
+Fetching dashboard statistics...
+[DEBUG] Query executed in 1ms: 
+      SELECT 
+        COUNT(*) as total_users,
+        COUNT(CASE WHEN role = 'vendor' THEN 1 END) ...
+User stats: { total_users: '30', vendors: '23', buyers: '1', active_users: '30' }
+[DEBUG] Query executed in 2ms: 
+      SELECT 
+        COUNT(*) as total_tenders,
+        COUNT(CASE WHEN status = 'open' THEN 1 END...
+Tender stats: {
+  total_tenders: '13',
+  open_tenders: '11',
+  closed_tenders: '2',
+  active_tenders: '11'
+}
+[DEBUG] Query executed in 2ms: 
+      SELECT 
+        COUNT(*) as total_bids,
+        COUNT(CASE WHEN status = 'pending' THEN 1 END...
+Bid stats: {
+  total_bids: '3',
+  pending_bids: '1',
+  accepted_bids: '2',
+  rejected_bids: '0',
+  total_value: '25200.00'
+}
+[DEBUG] Query executed in 2ms: 
+      SELECT t.id, t.title, t.description, t.status, t.created_at, c.name as category_name
+      FR...
+Recent tenders count: 5
+[DEBUG] Query executed in 3ms: 
+      SELECT b.id, b.amount, b.status, b.submitted_at, 
+             t.title as tender_title, 
+    ...
+Recent bids count: 3
+Dashboard response prepared successfully
+[DEBUG] Query executed in 16ms: SELECT * FROM users WHERE id = $1...
+[DEBUG] Query executed in 3ms: SELECT category FROM user_categories WHERE user_id = $1 ORDER BY category...
+[DEBUG] Query executed in 2ms: SELECT * FROM users WHERE id = $1...
+[DEBUG] Query executed in 2ms: SELECT category FROM user_categories WHERE user_id = $1 ORDER BY category...
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T16:44:04.924Z',
+  type: 'single_connection'
+}
+[DEBUG] Query executed in 3ms: SELECT * FROM users WHERE id = $1...
+Fetching dashboard statistics...
+[DEBUG] Query executed in 1ms: 
+      SELECT 
+        COUNT(*) as total_users,
+        COUNT(CASE WHEN role = 'vendor' THEN 1 END) ...
+User stats: { total_users: '30', vendors: '23', buyers: '1', active_users: '30' }
+[DEBUG] Query executed in 2ms: 
+      SELECT 
+        COUNT(*) as total_tenders,
+        COUNT(CASE WHEN status = 'open' THEN 1 END...
+Tender stats: {
+  total_tenders: '13',
+  open_tenders: '11',
+  closed_tenders: '2',
+  active_tenders: '11'
+}
+[DEBUG] Query executed in 2ms: 
+      SELECT 
+        COUNT(*) as total_bids,
+        COUNT(CASE WHEN status = 'pending' THEN 1 END...
+Bid stats: {
+  total_bids: '3',
+  pending_bids: '1',
+  accepted_bids: '2',
+  rejected_bids: '0',
+  total_value: '25200.00'
+}
+[DEBUG] Query executed in 3ms: 
+      SELECT t.id, t.title, t.description, t.status, t.created_at, c.name as category_name
+      FR...
+Recent tenders count: 5
+[DEBUG] Query executed in 7ms: 
+      SELECT b.id, b.amount, b.status, b.submitted_at, 
+             t.title as tender_title, 
+    ...
+Recent bids count: 3
+Dashboard response prepared successfully
+[DEBUG] Query executed in 2ms: SELECT * FROM users WHERE id = $1...
+Fetching dashboard statistics...
+[DEBUG] Query executed in 2ms: 
+      SELECT 
+        COUNT(*) as total_users,
+        COUNT(CASE WHEN role = 'vendor' THEN 1 END) ...
+User stats: { total_users: '30', vendors: '23', buyers: '1', active_users: '30' }
+[DEBUG] Query executed in 1ms: 
+      SELECT 
+        COUNT(*) as total_tenders,
+        COUNT(CASE WHEN status = 'open' THEN 1 END...
+Tender stats: {
+  total_tenders: '13',
+  open_tenders: '11',
+  closed_tenders: '2',
+  active_tenders: '11'
+}
+[DEBUG] Query executed in 2ms: 
+      SELECT 
+        COUNT(*) as total_bids,
+        COUNT(CASE WHEN status = 'pending' THEN 1 END...
+Bid stats: {
+  total_bids: '3',
+  pending_bids: '1',
+  accepted_bids: '2',
+  rejected_bids: '0',
+  total_value: '25200.00'
+}
+[DEBUG] Query executed in 2ms: 
+      SELECT t.id, t.title, t.description, t.status, t.created_at, c.name as category_name
+      FR...
+Recent tenders count: 5
+[DEBUG] Query executed in 3ms: 
+      SELECT b.id, b.amount, b.status, b.submitted_at, 
+             t.title as tender_title, 
+    ...
+Recent bids count: 3
+Dashboard response prepared successfully
+[DEBUG] Query executed in 2ms: SELECT * FROM users WHERE id = $1...
+[DEBUG] Query executed in 10ms: 
+      SELECT u.id, u.email, u.username, u.company_name, u.phone, u.role, u.category, u.address,
+   ...
+[DEBUG] Query executed in 2ms: SELECT * FROM users WHERE id = $1...
+[DEBUG] Query executed in 6ms: 
+      SELECT u.id, u.email, u.username, u.company_name, u.phone, u.role, u.category, u.address,
+   ...
+[DEBUG] Query executed in 3ms: SELECT * FROM users WHERE id = $1...
+[DEBUG] Query executed in 5ms: 
+      SELECT b.*, t.title as tender_title, COALESCE(u.company_name, u.username, u.email) as vendor_...
+[DEBUG] Query executed in 13ms: SELECT * FROM file_uploads WHERE entity_type = $1 AND entity_id = $2 ORDER BY created_at DESC...
+=== Bid 18 Attachments Debug ===
+Total attachments: 1
+Attachment 1: {
+  filename: '1757953305607-f0b5f389-4732-4916-9d11-ecb77659679b.pdf',
+  originalName: 'PAF tender.pdf',
+  name: 'PAF tender.pdf',
+  url: '/api/upload/view/1757953305607-f0b5f389-4732-4916-9d11-ecb77659679b.pdf',
+  downloadUrl: '/api/upload/download/1757953305607-f0b5f389-4732-4916-9d11-ecb77659679b.pdf',
+  size: 354101,
+  type: 'application/pdf'
+}
+[DEBUG] Query executed in 2ms: SELECT * FROM users WHERE id = $1...
+[DEBUG] Query executed in 7ms: 
+      SELECT b.*, t.title as tender_title, COALESCE(u.company_name, u.username, u.email) as vendor_...
+[DEBUG] Query executed in 4ms: SELECT * FROM file_uploads WHERE entity_type = $1 AND entity_id = $2 ORDER BY created_at DESC...
+=== Bid 18 Attachments Debug ===
+Total attachments: 1
+Attachment 1: {
+  filename: '1757953305607-f0b5f389-4732-4916-9d11-ecb77659679b.pdf',
+  originalName: 'PAF tender.pdf',
+  name: 'PAF tender.pdf',
+  url: '/api/upload/view/1757953305607-f0b5f389-4732-4916-9d11-ecb77659679b.pdf',
+  downloadUrl: '/api/upload/download/1757953305607-f0b5f389-4732-4916-9d11-ecb77659679b.pdf',
+  size: 354101,
+  type: 'application/pdf'
+}
+[DEBUG] Query executed in 6ms: SELECT * FROM categories WHERE is_active = true ORDER BY name...
+[DEBUG] Query executed in 18ms: SELECT * FROM users WHERE id = $1...
+[DEBUG] Query executed in 2ms: SELECT * FROM categories WHERE is_active = true ORDER BY name...
+[DEBUG] Query executed in 1ms: SELECT * FROM users WHERE id = $1...
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T16:45:04.925Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T16:46:04.927Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T16:47:04.938Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T16:48:04.940Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T16:49:04.954Z',
+  type: 'single_connection'
+}
+[DB Health] Connection status: {
+  connected: true,
+  timestamp: '2025-09-20T16:50:04.960Z',
+  type: 'single_connection'
+}

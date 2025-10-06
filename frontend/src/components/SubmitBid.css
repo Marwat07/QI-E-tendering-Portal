@@ -1,0 +1,550 @@
+/* Submit Bid Styles */
+.submit-bid {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 120px 20px 20px 20px; /* Added top padding to account for fixed header */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  position: relative;
+  z-index: 1; /* Ensure proper layering below fixed header */
+}
+
+/* Header */
+.submit-bid-header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 30px;
+  background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+  border-radius: 16px;
+  color: white;
+  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+}
+
+.submit-bid-header h1 {
+  margin: 0 0 8px 0;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.submit-bid-header p {
+  margin: 0;
+  opacity: 0.9;
+  font-size: 16px;
+}
+
+/* Loading States */
+.submit-bid-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 20px 60px 20px; /* Added top padding to account for fixed header */
+  text-align: center;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f4f6;
+  border-top: 4px solid #10b981;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.submit-bid-loading p {
+  color: #6b7280;
+  margin: 0;
+}
+
+/* Error States */
+.submit-bid-error,
+.submit-bid-expired {
+  text-align: center;
+  padding: 40px 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  margin: 120px auto 20px auto; /* Added top margin to account for fixed header */
+  max-width: 600px;
+}
+
+.submit-bid-error h2,
+.submit-bid-expired h2 {
+  color: #dc2626;
+  margin: 0 0 8px 0;
+}
+
+.submit-bid-error p,
+.submit-bid-expired p {
+  color: #6b7280;
+  margin: 0 0 20px 0;
+}
+
+.submit-bid-error button,
+.submit-bid-expired button {
+  margin: 0 8px;
+}
+
+/* Tender Info Card */
+.tender-info-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+  margin-bottom: 30px;
+  border-left: 4px solid #10b981;
+}
+
+.tender-info-card h2 {
+  margin: 0 0 20px 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.tender-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+  padding: 16px;
+  background: #f8fafc;
+  border-radius: 8px;
+}
+
+.tender-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tender-detail .label {
+  font-size: 12px;
+  color: #9ca3af;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tender-detail .value {
+  font-size: 16px;
+  color: #374151;
+  font-weight: 600;
+}
+
+.days-remaining {
+  color: #10b981;
+  font-weight: 500;
+  margin-left: 8px;
+}
+
+.days-remaining.urgent {
+  color: #dc2626;
+}
+
+.tender-description {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 16px;
+}
+
+.tender-description strong {
+  color: #374151;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.tender-description p {
+  margin: 0;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+/* Bid Form Card */
+.bid-form-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  padding: 30px;
+  margin-bottom: 30px;
+}
+
+.form-section {
+  margin-bottom: 30px;
+}
+
+.form-section h3 {
+  margin: 0 0 20px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 10; /* Ensure form elements appear above other content */
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-group small {
+  display: block;
+  margin-top: 4px;
+  color: #6b7280;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+/* File Upload Styles */
+.file-upload-area {
+  position: relative;
+  border: 2px dashed #d1d5db;
+  border-radius: 12px;
+  padding: 40px 20px;
+  text-align: center;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  background: #f9fafb;
+}
+
+.file-upload-area:hover {
+  border-color: #10b981;
+  background: #f0fdf4;
+}
+
+.file-upload-area.dragover {
+  border-color: #10b981;
+  background: #ecfdf5;
+  transform: scale(1.02);
+}
+
+.file-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.file-upload-content {
+  /* Removed pointer-events: none to allow clicking */
+}
+
+.file-upload-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.file-upload-text p {
+  margin: 0 0 8px 0;
+  color: #374151;
+}
+
+.file-upload-text p:first-child {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.file-upload-text p:last-child {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* Upload Progress */
+.upload-progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+  margin-top: 16px;
+}
+
+.loading-spinner.small {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #d1d5db;
+  border-top: 2px solid #10b981;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Uploaded Files */
+.uploaded-files {
+  margin-top: 20px;
+  padding: 20px;
+  background: #f8fafc;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+}
+
+.uploaded-files h4 {
+  margin: 0 0 16px 0;
+  color: #374151;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.file-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.file-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.file-item:hover {
+  border-color: #d1d5db;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.file-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.file-icon {
+  font-size: 24px;
+  width: 32px;
+  text-align: center;
+}
+
+.file-details {
+  flex: 1;
+}
+
+.file-name {
+  font-weight: 500;
+  color: #1f2937;
+  margin-bottom: 2px;
+  word-break: break-all;
+}
+
+.file-size {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.btn-remove-file {
+  background: #fee2e2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.btn-remove-file:hover {
+  background: #fecaca;
+  border-color: #f87171;
+  transform: scale(1.1);
+}
+
+/* Error Message */
+.error-message {
+  background: #fee2e2;
+  color: #dc2626;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border: 1px solid #fecaca;
+  font-size: 14px;
+}
+
+/* Form Actions */
+.form-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+  padding-top: 20px;
+  border-top: 1px solid #e5e7eb;
+  margin-top: 30px;
+  position: relative;
+  z-index: 100; /* Ensure action buttons appear above other content */
+}
+
+.btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  min-width: 120px;
+  position: relative;
+  z-index: 101; /* Ensure buttons appear above overlapping elements */
+}
+
+.btn-primary {
+  background: #10b981;
+  color: white;
+  border: 1px solid #10b981;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #059669;
+  border-color: #059669;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: #f3f4f6;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #e5e7eb;
+  border-color: #9ca3af;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* Existing Bid Notice */
+.existing-bid-notice {
+  background: #fef3c7;
+  border: 1px solid #fde047;
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.existing-bid-notice h4 {
+  margin: 0 0 8px 0;
+  color: #92400e;
+  font-size: 16px;
+}
+
+.existing-bid-notice p {
+  margin: 0;
+  color: #92400e;
+  line-height: 1.5;
+}
+
+/* File Status Indicators */
+.file-status {
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+.file-status.uploaded {
+  color: #059669;
+}
+
+.file-status.selected {
+  color: #0284c7;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .submit-bid {
+    padding: 100px 16px 16px 16px; /* Adjust top padding for mobile navbar */
+  }
+  
+  .submit-bid-loading {
+    padding: 100px 16px 60px 16px; /* Adjust for mobile */
+  }
+  
+  .submit-bid-error,
+  .submit-bid-expired {
+    margin: 100px 16px 20px 16px; /* Adjust for mobile */
+  }
+  
+  .submit-bid-header {
+    padding: 20px;
+  }
+  
+  .submit-bid-header h1 {
+    font-size: 24px;
+  }
+  
+  .tender-details {
+    grid-template-columns: 1fr;
+  }
+  
+  .bid-form-card {
+    padding: 20px;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-group input,
+  .form-group textarea {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+}

@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bid Management Table Test</title>
+    <style>
+        /* Copy essential CSS from AdminDashboard.css */
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            margin: 20px;
+            background-color: #f3f4f6;
+        }
+
+        .data-table {
+            background-color: #ffffff;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-top: 1rem;
+            width: 100%;
+        }
+
+        .data-table table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+
+        .data-table thead {
+            background-color: #f9fafb;
+        }
+
+        .data-table th {
+            padding: 1rem 1.5rem;
+            text-align: left;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid #e5e7eb;
+            border-right: 1px solid #f3f4f6;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        .data-table td {
+            padding: 0.75rem 0.5rem;
+            vertical-align: middle;
+            border-right: 1px solid #f9fafb;
+            position: relative;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Action Icons for All Tables */
+        .actions-column {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            align-items: center;
+            padding: 0.5rem 0.25rem;
+            flex-wrap: nowrap;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .btn-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.4rem;
+            border: 1px solid transparent;
+            border-radius: 0.375rem;
+            background: none;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            text-decoration: none;
+            min-width: 1.8rem;
+            min-height: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        /* Accept button styling */
+        .btn-icon.accept {
+            color: #10b981;
+            background-color: #f0fdf4;
+            border-color: #d1fae5;
+        }
+
+        /* Reject button styling */
+        .btn-icon.reject {
+            color: #ef4444;
+            background-color: #fef2f2;
+            border-color: #fecaca;
+        }
+
+        /* View button styling */
+        .btn-icon.view {
+            color: #3b82f6;
+            background-color: #eff6ff;
+            border-color: #bfdbfe;
+        }
+
+        /* Bid Management Specific Styling */
+        .data-table[data-table-type="bid-management"] th:nth-child(1),
+        .data-table[data-table-type="bid-management"] td:nth-child(1) {
+            width: 20%;
+            max-width: 250px;
+            min-width: 180px;
+            padding-left: 1rem;
+            padding-right: 0.75rem;
+        }
+
+        .data-table[data-table-type="bid-management"] th:nth-child(2),
+        .data-table[data-table-type="bid-management"] td:nth-child(2) {
+            width: 18%;
+            max-width: 200px;
+            min-width: 150px;
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+        }
+
+        .data-table[data-table-type="bid-management"] th:nth-child(3),
+        .data-table[data-table-type="bid-management"] td:nth-child(3) {
+            width: 12%;
+            max-width: 120px;
+            min-width: 100px;
+            text-align: center;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+        }
+
+        .data-table[data-table-type="bid-management"] th:nth-child(4),
+        .data-table[data-table-type="bid-management"] td:nth-child(4) {
+            width: 15%;
+            max-width: 150px;
+            min-width: 120px;
+            text-align: center;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+        }
+
+        .data-table[data-table-type="bid-management"] th:nth-child(5),
+        .data-table[data-table-type="bid-management"] td:nth-child(5) {
+            width: 10%;
+            max-width: 100px;
+            min-width: 85px;
+            text-align: center;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+        }
+
+        .data-table[data-table-type="bid-management"] th:nth-child(6),
+        .data-table[data-table-type="bid-management"] td:nth-child(6) {
+            width: 10%;
+            max-width: 100px;
+            min-width: 85px;
+            text-align: center;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+        }
+
+        .data-table[data-table-type="bid-management"] th:nth-child(7),
+        .data-table[data-table-type="bid-management"] td:nth-child(7) {
+            width: 18%;
+            max-width: 180px;
+            min-width: 160px;
+            text-align: center;
+            padding-left: 0.5rem;
+            padding-right: 1rem;
+        }
+
+        .data-table[data-table-type="bid-management"] td:nth-child(7) {
+            padding: 0.75rem 0.5rem !important;
+        }
+
+        .data-table[data-table-type="bid-management"] td:nth-child(7) .actions-column {
+            gap: 0.4rem;
+            padding: 0.25rem;
+        }
+
+        .data-table[data-table-type="bid-management"] .actions-column .btn-icon {
+            min-width: 2rem;
+            min-height: 2rem;
+            padding: 0.5rem;
+        }
+
+        .data-table[data-table-type="bid-management"] table {
+            table-layout: fixed !important;
+            width: 100% !important;
+            min-width: 1000px;
+        }
+
+        .data-table[data-table-type="bid-management"] th,
+        .data-table[data-table-type="bid-management"] td {
+            border-right: 1px solid #e5e7eb;
+        }
+
+        .data-table[data-table-type="bid-management"] th:last-child,
+        .data-table[data-table-type="bid-management"] td:last-child {
+            border-right: none;
+        }
+
+        .data-table[data-table-type="bid-management"] td:nth-child(7) {
+            text-align: center !important;
+            vertical-align: middle;
+        }
+
+        .data-table[data-table-type="bid-management"] td:nth-child(7) .actions-column {
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            display: flex;
+            gap: 0.5rem;
+            margin: 0 auto;
+        }
+
+        .data-table[data-table-type="bid-management"] th:nth-child(7) {
+            text-align: center !important;
+        }
+
+        /* Fix document actions and attachments preview in bid management */
+        .data-table[data-table-type="bid-management"] .attachments-preview {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            flex-wrap: nowrap;
+            justify-content: center;
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        .data-table[data-table-type="bid-management"] .attachments-preview .badge {
+            font-size: 0.7rem;
+            padding: 0.125rem 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .data-table[data-table-type="bid-management"] .document-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.125rem;
+            align-items: center;
+            max-width: 100%;
+            margin-top: 0.25rem;
+        }
+
+        .data-table[data-table-type="bid-management"] .document-actions .btn-icon {
+            padding: 0.125rem;
+            min-width: 1.2rem;
+            min-height: 1.2rem;
+            font-size: 0.7rem;
+            flex-shrink: 0;
+        }
+
+        .data-table[data-table-type="bid-management"] td:nth-child(4) .btn-icon {
+            padding: 0.125rem !important;
+            min-width: 1.2rem !important;
+            min-height: 1.2rem !important;
+            margin: 0;
+        }
+
+        .data-table[data-table-type="bid-management"] .document-actions span {
+            font-size: 0.6rem !important;
+            color: #6b7280;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            max-width: 80px;
+            display: inline-block;
+        }
+
+        .table-cell-primary {
+            font-weight: 500;
+            color: #1f2937;
+        }
+
+        .table-cell-secondary {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-top: 0.25rem;
+        }
+
+        .table-cell-center {
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 2rem;
+        }
+
+        .badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 60px;
+        }
+
+        .badge-yellow {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+
+        .badge-green {
+            background-color: #dcfce7;
+            color: #16a34a;
+        }
+
+        .badge-red {
+            background-color: #fee2e2;
+            color: #dc2626;
+        }
+
+        .badge-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bid Management Table Test</h1>
+    
+    <div class="data-table" data-table-type="bid-management">
+        <table>
+            <thead>
+                <tr>
+                    <th>Tender</th>
+                    <th>Vendor</th>
+                    <th>Bid Amount</th>
+                    <th>Documents</th>
+                    <th>Submitted</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Pending Bid Row -->
+                <tr>
+                    <td>
+                        <div class="table-cell-content">
+                            <div class="table-cell-primary">Office Equipment Tender</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="table-cell-content">
+                            <div class="table-cell-primary">John Smith</div>
+                            <div class="table-cell-secondary">Smith Technologies Inc.</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="table-cell-center" style="font-weight: 600;">
+                            $25,000
+                        </div>
+                    </td>
+                    <td>
+                        <div class="table-cell-center">
+                            <div class="attachments-preview">
+                                <span class="badge badge-blue">
+                                    3 files
+                                </span>
+                                <div class="document-actions">
+                                    <div style="display: flex; align-items: center; gap: 0.125rem;">
+                                        <button class="btn-icon" style="color: #3b82f6; min-width: 1.2rem; min-height: 1.2rem; padding: 0.125rem;">
+                                            👁
+                                        </button>
+                                        <span style="font-size: 0.6rem; color: #6b7280;">doc1.pdf</span>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: 0.125rem;">
+                                        <button class="btn-icon" style="color: #3b82f6; min-width: 1.2rem; min-height: 1.2rem; padding: 0.125rem;">
+                                            👁
+                                        </button>
+                                        <span style="font-size: 0.6rem; color: #6b7280;">doc2.pdf</span>
+                                    </div>
+                                    <div style="font-size: 0.6rem; color: #6b7280; text-align: center;">+1 more</div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="table-cell-center">
+                            2024-01-15
+                        </div>
+                    </td>
+                    <td>
+                        <div class="badge-container">
+                            <span class="badge badge-yellow">
+                                pending
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="actions-column">
+                            <button class="btn-icon accept" title="Accept Bid" style="min-width: 2rem; min-height: 2rem; padding: 0.5rem;">
+                                ✓
+                            </button>
+                            <button class="btn-icon reject" title="Reject Bid" style="min-width: 2rem; min-height: 2rem; padding: 0.5rem;">
+                                ✕
+                            </button>
+                            <button class="btn-icon view" title="View Details" style="min-width: 2rem; min-height: 2rem; padding: 0.5rem;">
+                                👁
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                
+                <!-- Accepted Bid Row -->
+                <tr>
+                    <td>
+                        <div class="table-cell-content">
+                            <div class="table-cell-primary">IT Infrastructure Upgrade</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="table-cell-content">
+                            <div class="table-cell-primary">Alice Johnson</div>
+                            <div class="table-cell-secondary">TechCorp Solutions</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="table-cell-center" style="font-weight: 600;">
+                            $75,500
+                        </div>
+                    </td>
+                    <td>
+                        <div class="table-cell-center">
+                            <span class="badge badge-blue" style="font-size: 0.75rem;">
+                                5 files
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="table-cell-center">
+                            2024-01-12
+                        </div>
+                    </td>
+                    <td>
+                        <div class="badge-container">
+                            <span class="badge badge-green">
+                                accepted
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="actions-column">
+                            <button class="btn-icon view" title="View Details" style="min-width: 2rem; min-height: 2rem; padding: 0.5rem;">
+                                👁
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                
+                <!-- Rejected Bid Row -->
+                <tr>
+                    <td>
+                        <div class="table-cell-content">
+                            <div class="table-cell-primary">Construction Services</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="table-cell-content">
+                            <div class="table-cell-primary">Mike Wilson</div>
+                            <div class="table-cell-secondary">BuildRight Contractors</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="table-cell-center" style="font-weight: 600;">
+                            $120,000
+                        </div>
+                    </td>
+                    <td>
+                        <div class="table-cell-center">
+                            <span class="badge badge-blue" style="font-size: 0.75rem;">
+                                2 files
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="table-cell-center">
+                            2024-01-10
+                        </div>
+                    </td>
+                    <td>
+                        <div class="badge-container">
+                            <span class="badge badge-red">
+                                rejected
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="actions-column">
+                            <button class="btn-icon view" title="View Details" style="min-width: 2rem; min-height: 2rem; padding: 0.5rem;">
+                                👁
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2>Visual Check Points:</h2>
+    <ul>
+        <li>✅ Action buttons should be centered horizontally in their column</li>
+        <li>✅ Action buttons should be properly spaced with 0.5rem gap</li>
+        <li>✅ No overlapping between vendor names/company and documents columns</li>
+        <li>✅ All columns should fit within table width without horizontal scroll</li>
+        <li>✅ Text should truncate properly with ellipsis if needed</li>
+        <li>✅ Buttons should have proper colors and hover states</li>
+    </ul>
+</body>
+</html>

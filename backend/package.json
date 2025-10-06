@@ -1,0 +1,49 @@
+{
+  "name": "etendering-backend",
+  "version": "1.0.0",
+  "description": "E-Tendering Portal Backend API",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "migrate": "node scripts/migrate.js",
+    "seed": "node scripts/seed.js",
+    "health:db": "node scripts/db_health_check.js",
+    "migrate:username": "node scripts/add-username-migration.js",
+    "migrate:remove-names": "node scripts/remove-name-columns-migration.js",
+    "test:user-creation": "node scripts/test-user-creation.js",
+    "setup:gmail": "node scripts/setup-gmail.js",
+    "test:email": "node scripts/test-email.js",
+    "test:login:username": "node scripts/test-username-login.js"
+  },
+  "keywords": [
+    "etendering",
+    "backend",
+    "api",
+    "express",
+    "postgresql"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.1692.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.6.1",
+    "express": "^4.18.2",
+    "express-rate-limit": "^7.1.5",
+    "express-validator": "^7.0.1",
+    "helmet": "^7.1.0",
+    "joi": "^18.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.10.1",
+    "pg": "^8.16.3",
+    "uuid": "^9.0.1",
+    "winston": "^3.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}

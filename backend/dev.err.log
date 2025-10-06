@@ -1,0 +1,76 @@
+(node:18424) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:16796) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+[ERROR] Database query error: column u.first_name does not exist
+[ERROR] Query: 
+      SELECT t.*, c.name as category_name, u.first_name || ' ' || u.last_name as created_by_name
+      FROM tenders t
+      LEFT JOIN categories c ON t.category_id = c.id
+      LEFT JOIN users u ON t.created_by = u.id
+      WHERE 1=1
+     ORDER BY t.created_at DESC LIMIT $1
+Error fetching tenders: error: column u.first_name does not exist
+    at C:\Users\Talal Khan\etendering portal\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async query (C:\Users\Talal Khan\etendering portal\backend\config\database.js:101:17)
+    at async Tender.findAll (C:\Users\Talal Khan\etendering portal\backend\models\Tender.js:132:20)
+    at async C:\Users\Talal Khan\etendering portal\backend\routes\admin.js:692:21 {
+  length: 110,
+  severity: 'ERROR',
+  code: '42703',
+  detail: undefined,
+  hint: undefined,
+  position: '45',
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: 'parse_relation.c',
+  line: '3721',
+  routine: 'errorMissingColumn'
+}
+[ERROR] Database query error: column u.first_name does not exist
+[ERROR] Query: 
+      SELECT t.*, c.name as category_name, u.first_name || ' ' || u.last_name as created_by_name
+      FROM tenders t
+      LEFT JOIN categories c ON t.category_id = c.id
+      LEFT JOIN users u ON t.created_by = u.id
+      WHERE 1=1
+     ORDER BY t.created_at DESC LIMIT $1
+Error fetching tenders: error: column u.first_name does not exist
+    at C:\Users\Talal Khan\etendering portal\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async query (C:\Users\Talal Khan\etendering portal\backend\config\database.js:101:17)
+    at async Tender.findAll (C:\Users\Talal Khan\etendering portal\backend\models\Tender.js:132:20)
+    at async C:\Users\Talal Khan\etendering portal\backend\routes\admin.js:692:21 {
+  length: 110,
+  severity: 'ERROR',
+  code: '42703',
+  detail: undefined,
+  hint: undefined,
+  position: '45',
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: 'parse_relation.c',
+  line: '3721',
+  routine: 'errorMissingColumn'
+}
