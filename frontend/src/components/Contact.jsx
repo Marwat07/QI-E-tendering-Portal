@@ -6,20 +6,20 @@ const Contact = () => {
     {
       icon: '📧',
       label: 'Email',
-      value: 'info@etendering.com',
+      value: 'scm@qaswaindustries.com',
       link: 'mailto:info@etendering.com',
     },
     {
       icon: '📞',
       label: 'Phone',
-      value: '+123 456 7890',
+      value: '+92 319 0508030',
       link: 'tel:+1234567890',
     },
     {
       icon: '📍',
       label: 'Address',
-      value: '123 Tender Lane, Business City',
-      link: 'https://maps.google.com/?q=123+Tender+Lane,+Business+City',
+      value: 'Plot No: 56, 57 and 58 Special Economic Zone,Hattar',
+      link: 'https://maps.google.com/?q=Plot+No+56,+57+and+58+Special+Economic+Zone,+Hattar',
     },
   ];
 

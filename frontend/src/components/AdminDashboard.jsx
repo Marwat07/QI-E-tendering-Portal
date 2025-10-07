@@ -2410,7 +2410,7 @@ const UserManagementTab = () => {
         <h1 className="tab-title">User Management</h1>
         <p className="tab-subtitle">Manage all users in the system</p>
         
-        {/* Search, Filter, and Create Button */}
+        {/* Search and Filter */}
         <div className="search-filter-container">
           <div className="search-group">
             <input
@@ -2443,13 +2443,6 @@ const UserManagementTab = () => {
             <option value="inactive">Inactive</option>
             <option value="archived">Archived</option>
           </select>
-          <button 
-            onClick={() => setShowCreateModal(true)}
-            className="btn btn-primary"
-            style={{ minWidth: '140px' }}
-          >
-            Create New User
-          </button>
         </div>
       </div>
       

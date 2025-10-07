@@ -7706,3 +7706,9 @@
 {"level":"info","message":"User logged in: mt123321123123@admin.com","service":"etendering-backend","timestamp":"2025-10-02T04:55:27.989Z"}
 {"level":"info","message":"Server running on port 3001 in development mode","service":"etendering-backend","timestamp":"2025-10-06T10:09:40.607Z"}
 {"level":"info","message":"Email service connected successfully","service":"etendering-backend","timestamp":"2025-10-06T10:09:42.295Z"}
+{"level":"info","message":"Server running on port 3001 in development mode","service":"etendering-backend","timestamp":"2025-10-06T11:03:45.748Z"}
+{"level":"info","message":"Email service connected successfully","service":"etendering-backend","timestamp":"2025-10-06T11:03:47.174Z"}
+{"level":"info","message":"Server running on port 3001 in development mode","service":"etendering-backend","timestamp":"2025-10-06T14:07:24.629Z"}
+{"level":"info","message":"Email service connected successfully","service":"etendering-backend","timestamp":"2025-10-06T14:07:26.435Z"}
+{"level":"info","message":"User logged in: mt123321123123@admin.com","service":"etendering-backend","timestamp":"2025-10-06T14:47:53.839Z"}
+{"level":"info","message":"SIGINT received, shutting down gracefully","service":"etendering-backend","timestamp":"2025-10-06T15:41:55.024Z"}

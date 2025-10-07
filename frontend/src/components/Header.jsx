@@ -104,6 +104,9 @@ const Header = () => {
             <ProfileDropdown />
           ) : (
             <div className="auth-links">
+              <Link to="/register" className="register-btn">
+                Register
+              </Link>
               <Link to="/login" className="login-btn">
                 Login
               </Link>

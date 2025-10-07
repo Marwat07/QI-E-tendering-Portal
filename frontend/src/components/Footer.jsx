@@ -8,9 +8,9 @@ const Footer = () => {
     {
       title: 'Contact Us',
       items: [
-        { label: 'Email: info@etendering.com', link: 'mailto:info@etendering.com' },
-        { label: 'Phone: +123 456 7890', link: 'tel:+1234567890' },
-        { label: '123 Tender Lane, Business City', link: '#' }
+        { label: 'Email: scm@qaswaindustries.com', link: 'mailto:info@etendering.com' },
+        { label: 'Phone: +92 319 0508030', link: 'tel:+1234567890' },
+        { label: 'Plot No: 56, 57 and 58 Special Economic Zone, Hattar', link: '#' }
       ]
     },
     {

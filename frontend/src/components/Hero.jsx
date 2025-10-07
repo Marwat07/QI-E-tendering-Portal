@@ -42,6 +42,10 @@ const Hero = () => {
     navigate('/login');
   };
 
+  const handleRegister = () => {
+    navigate('/register');
+  };
+
   return (
     <section className="hero" id="home">
       <div className="hero-content">
@@ -67,18 +71,23 @@ const Hero = () => {
             {!isAuthenticated ? (
               <>
                 <button 
-                  
-                 className="btn btn-secondary"
+                  className="btn btn-success"
+                  onClick={handleRegister}
+                >
+                  Register Now
+                </button>
+                <button 
+                  className="btn btn-primary"
                   onClick={handleLogin}
                 >
                   Login to Participate
                 </button>
-                <button 
+                {/* <button 
                  className="btn btn-primary"
                   onClick={scrollToContact}
                 >
                   Request for Quote
-                </button>
+                </button> */}
               </>
             ) : (
               <>
