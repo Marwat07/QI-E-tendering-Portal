@@ -18,13 +18,16 @@ router.get('/dashboard', async (req, res) => {
   try {
     console.log('Fetching dashboard statistics...');
     
-    // Get user statistics (adjusted for actual schema)
+    // Get user statistics with credential expiry info
     const userStats = await query(`
       SELECT 
         COUNT(*) as total_users,
         COUNT(CASE WHEN role = 'vendor' THEN 1 END) as vendors,
         COUNT(CASE WHEN role = 'buyer' THEN 1 END) as buyers,
-        COUNT(*) as active_users
+        COUNT(*) as active_users,
+        COUNT(CASE WHEN credential_expires_at <= CURRENT_TIMESTAMP THEN 1 END) as expired_users,
+        COUNT(CASE WHEN credential_expires_at <= CURRENT_TIMESTAMP + INTERVAL '7 days' AND credential_expires_at > CURRENT_TIMESTAMP THEN 1 END) as critical_expiry,
+        COUNT(CASE WHEN credential_expires_at <= CURRENT_TIMESTAMP + INTERVAL '30 days' AND credential_expires_at > CURRENT_TIMESTAMP + INTERVAL '7 days' THEN 1 END) as warning_expiry
       FROM users
     `);
     console.log('User stats:', userStats.rows[0]);
@@ -82,6 +85,9 @@ router.get('/dashboard', async (req, res) => {
           vendors: parseInt(userStats.rows[0].vendors) || 0,
           buyers: parseInt(userStats.rows[0].buyers) || 0,
           activeUsers: parseInt(userStats.rows[0].active_users) || 0,
+          expiredUsers: parseInt(userStats.rows[0].expired_users) || 0,
+          criticalExpiryUsers: parseInt(userStats.rows[0].critical_expiry) || 0,
+          warningExpiryUsers: parseInt(userStats.rows[0].warning_expiry) || 0,
           totalTenders: parseInt(tenderStats.rows[0].total_tenders) || 0,
           openTenders: parseInt(tenderStats.rows[0].open_tenders) || 0,
           closedTenders: parseInt(tenderStats.rows[0].closed_tenders) || 0,
@@ -194,10 +200,19 @@ router.get('/users', async (req, res) => {
     const { role, status, page = 1, limit = 50 } = req.query;
     const offset = (page - 1) * limit;
 
-    // Query to get all user data with categories
+    // Query to get all user data with categories and credential expiry info
     let queryText = `
       SELECT u.id, u.email, u.username, u.company_name, u.phone, u.role, u.category, u.address,
              u.is_active, u.is_verified, u.is_archived, u.created_at, u.updated_at,
+             u.credential_expires_at,
+             EXTRACT(DAYS FROM (u.credential_expires_at - CURRENT_TIMESTAMP)) AS days_until_expiry,
+             CASE 
+               WHEN u.credential_expires_at IS NULL THEN 'no_expiry'
+               WHEN u.credential_expires_at <= CURRENT_TIMESTAMP THEN 'expired'
+               WHEN u.credential_expires_at <= CURRENT_TIMESTAMP + INTERVAL '7 days' THEN 'critical'
+               WHEN u.credential_expires_at <= CURRENT_TIMESTAMP + INTERVAL '30 days' THEN 'warning'
+               ELSE 'valid'
+             END AS credential_status,
              COALESCE(
                array_agg(uc.category ORDER BY uc.category) FILTER (WHERE uc.category IS NOT NULL), 
                ARRAY[]::varchar[]
@@ -222,7 +237,7 @@ router.get('/users', async (req, res) => {
       queryText += ' AND u.is_archived = FALSE';
     }
 
-    queryText += ` GROUP BY u.id, u.email, u.username, u.company_name, u.phone, u.role, u.category, u.address, u.is_active, u.is_verified, u.is_archived, u.created_at, u.updated_at`;
+    queryText += ` GROUP BY u.id, u.email, u.username, u.company_name, u.phone, u.role, u.category, u.address, u.is_active, u.is_verified, u.is_archived, u.created_at, u.updated_at, u.credential_expires_at`;
     queryText += ` ORDER BY u.id DESC LIMIT $${paramCount + 1} OFFSET $${paramCount + 2}`;
     queryParams.push(limit, offset);
 
@@ -372,9 +387,10 @@ router.post('/users', async (req, res) => {
           {
             username: username,
             password: finalPassword
-          }
+          },
+          user.credential_expires_at  // Include credential expiry date
         );
-        console.log(`Credentials email sent to: ${email}`);
+        console.log(`Credentials email sent to: ${email} with expiry date`);
       } catch (emailError) {
         console.error('Failed to send credentials email:', emailError);
         // Don't fail the user creation if email fails
@@ -422,7 +438,14 @@ router.get('/users/:id', async (req, res) => {
         message: 'User not found' 
       });
     }
-    res.json(user.toJSON());
+    
+    // Include credential status in response
+    const userWithCredentialStatus = await user.toJSONWithCredentialStatus();
+    
+    res.json({
+      success: true,
+      data: userWithCredentialStatus
+    });
   } catch (error) {
     console.error('Error fetching user:', error);
     res.status(500).json({ 
@@ -1483,5 +1506,197 @@ router.post('/health/monitor', async (req, res) => {
 
 // GET /api/admin/health/database - Comprehensive database health check
 router.get('/health/database', databaseMiddleware.healthCheck);
+
+// GET /api/admin/credentials/expiring - Get users with expiring credentials
+router.get('/credentials/expiring', async (req, res) => {
+  try {
+    const { days = 30 } = req.query;
+    
+    const expiringUsers = await User.findUsersWithExpiringCredentials(parseInt(days));
+    
+    // Add credential status to each user
+    const usersWithStatus = expiringUsers.map(user => ({
+      id: user.id,
+      email: user.email,
+      username: user.username,
+      company_name: user.company_name,
+      role: user.role,
+      credential_expires_at: user.credential_expires_at,
+      credentialStatus: user.getCredentialStatus(),
+      isExpired: user.isCredentialExpired(),
+      daysUntilExpiry: user.getDaysUntilExpiry()
+    }));
+
+    res.json({
+      success: true,
+      data: {
+        users: usersWithStatus,
+        totalCount: usersWithStatus.length,
+        daysFilter: parseInt(days)
+      }
+    });
+  } catch (error) {
+    console.error('Error fetching users with expiring credentials:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch users with expiring credentials'
+    });
+  }
+});
+
+// POST /api/admin/credentials/extend/:userId - Extend user credentials
+router.post('/credentials/extend/:userId', async (req, res) => {
+  try {
+    const targetUser = await User.findById(req.params.userId);
+    if (!targetUser) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found'
+      });
+    }
+
+    const newExpiryDate = await targetUser.extendCredentials();
+    
+    console.log(`Credentials extended for user ${targetUser.email} by admin ${req.user.email}`);
+
+    res.json({
+      success: true,
+      message: 'Credentials extended successfully',
+      data: {
+        newExpiryDate,
+        extendedUser: {
+          id: targetUser.id,
+          email: targetUser.email,
+          username: targetUser.username,
+          credentialStatus: targetUser.getCredentialStatus()
+        }
+      }
+    });
+  } catch (error) {
+    console.error('Error extending user credentials:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to extend user credentials'
+    });
+  }
+});
+
+// POST /api/admin/credentials/bulk-extend - Bulk extend credentials
+router.post('/credentials/bulk-extend', async (req, res) => {
+  try {
+    const { userIds } = req.body;
+    
+    if (!Array.isArray(userIds) || userIds.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: 'userIds array is required and cannot be empty'
+      });
+    }
+
+    const results = [];
+    const errors = [];
+
+    for (const userId of userIds) {
+      try {
+        const user = await User.findById(userId);
+        if (user) {
+          const newExpiryDate = await user.extendCredentials();
+          results.push({
+            userId: user.id,
+            email: user.email,
+            newExpiryDate,
+            success: true
+          });
+        } else {
+          errors.push({
+            userId,
+            error: 'User not found'
+          });
+        }
+      } catch (error) {
+        errors.push({
+          userId,
+          error: error.message
+        });
+      }
+    }
+
+    console.log(`Bulk credential extension completed by admin ${req.user.email}. Success: ${results.length}, Errors: ${errors.length}`);
+
+    res.json({
+      success: true,
+      message: `Bulk credential extension completed. ${results.length} users updated.`,
+      data: {
+        successful: results,
+        errors: errors,
+        totalProcessed: userIds.length,
+        successCount: results.length,
+        errorCount: errors.length
+      }
+    });
+  } catch (error) {
+    console.error('Error in bulk credential extension:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to perform bulk credential extension'
+    });
+  }
+});
+
+// POST /api/admin/credentials/send-notifications - Send expiry notifications
+router.post('/credentials/send-notifications', async (req, res) => {
+  try {
+    const { days = 30, dryRun = false } = req.body;
+    
+    const expiringUsers = await User.findUsersWithExpiringCredentials(parseInt(days));
+    
+    if (expiringUsers.length === 0) {
+      return res.json({
+        success: true,
+        message: 'No users with expiring credentials found',
+        data: {
+          totalProcessed: 0,
+          successCount: 0,
+          errorCount: 0
+        }
+      });
+    }
+    
+    if (dryRun) {
+      const usersPreview = expiringUsers.map(user => ({
+        email: user.email,
+        daysUntilExpiry: user.getDaysUntilExpiry(),
+        status: user.getCredentialStatus().status
+      }));
+      
+      return res.json({
+        success: true,
+        message: `Dry run: Found ${expiringUsers.length} users with expiring credentials`,
+        data: {
+          preview: usersPreview,
+          totalUsers: expiringUsers.length
+        }
+      });
+    }
+    
+    // Send actual notifications
+    const emailService = require('../services/emailService');
+    const results = await emailService.sendBulkCredentialExpiryNotifications(expiringUsers);
+    
+    console.log(`Credential expiry notifications sent by admin ${req.user.email}. Success: ${results.successCount}, Errors: ${results.errorCount}`);
+    
+    res.json({
+      success: true,
+      message: `Notification process completed. ${results.successCount} notifications sent.`,
+      data: results
+    });
+  } catch (error) {
+    console.error('Error sending credential expiry notifications:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to send credential expiry notifications'
+    });
+  }
+});
 
 module.exports = router;

@@ -18,6 +18,7 @@ import {
   ArrowDown,
   RefreshCw
 } from 'lucide-react';
+import CategoryList from './CategoryList';
 import './ActiveTendersTable.css';
 
 // Use a consistent API base with the app-wide service defaults
@@ -671,8 +672,8 @@ const ActiveTendersTable = () => {
                         </td>
                         <td className="table-cell">
                           <div className="category-info">
-                            <span className="category-badge">
-                              {(() => {
+                            <CategoryList 
+                              categories={(() => {
                                 // Resolve display category using all available data
                                 if (tender.display_category && tender.display_category.trim()) return tender.display_category;
                                 if (tender.category_name && tender.category_name.trim()) return tender.category_name;
@@ -680,11 +681,14 @@ const ActiveTendersTable = () => {
                                   const cat = categories.find(c => c.id == tender.category_id);
                                   if (cat?.name) return cat.name;
                                 }
-                                if (Array.isArray(tender.categories) && tender.categories.length > 0) return tender.categories.join(', ');
+                                if (Array.isArray(tender.categories) && tender.categories.length > 0) return tender.categories;
                                 if (tender.category && String(tender.category).trim()) return tender.category;
                                 return 'Uncategorized';
                               })()}
-                            </span>
+                              maxVisible={2}
+                              compact={true}
+                              className="tender-table table-compact"
+                            />
                             {tender.activity_status && tender.activity_status !== 'normal' && (
                               <div className="category-activity-indicator">
                                 {tender.activity_status === 'new' && (

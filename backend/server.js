@@ -20,6 +20,7 @@ const categoryRoutes = require('./routes/categories');
 const adminRoutes = require('./routes/admin');
 const uploadRoutes = require('./routes/upload');
 const filesRoutes = require('./routes/files');
+const credentialRoutes = require('./routes/credentials');
 
 const app = express();
 
@@ -60,6 +61,7 @@ app.use('/api/categories', categoryRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/files', filesRoutes);
+app.use('/api/credentials', credentialRoutes);
 
 // Basic health check endpoint
 app.get('/api/health', (req, res) => {

@@ -1,6 +1,7 @@
 const express = require('express');
 const { body } = require('express-validator');
 const {
+  register,
   login,
   getProfile,
   updateProfile,
@@ -84,7 +85,22 @@ const resetPasswordValidation = [
     })
 ];
 
+// Minimal register validation
+const registerValidation = [
+  body('email')
+    .isEmail()
+    .normalizeEmail()
+    .withMessage('Please provide a valid email'),
+  body('company_name')
+    .notEmpty()
+    .withMessage('Company name is required'),
+  body('phone')
+    .notEmpty()
+    .withMessage('Phone is required')
+];
+
 // Routes
+router.post('/register', registerValidation, register);
 router.post('/login', loginValidation, login);
 router.post('/forgot-password', forgotPasswordValidation, forgotPassword);
 router.post('/reset-password', resetPasswordValidation, resetPassword);

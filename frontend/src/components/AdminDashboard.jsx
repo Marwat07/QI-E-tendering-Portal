@@ -30,6 +30,7 @@ import {
 import './AdminDashboard.css';
 import './CreateUserModal.css';
 import Pagination from './Pagination';
+import CategoryList from './CategoryList';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001/api';
 
@@ -2521,20 +2522,12 @@ const UserManagementTab = () => {
                     </td>
                     <td>
                       <div className="table-cell-center">
-                        <div className="categories-display">
-                          {user.categories && user.categories.length > 0 ? (
-                            user.categories.map((cat, index) => (
-                              <span key={cat} className="category-tag">
-                                {cat.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}
-                                {index < user.categories.length - 1 && ', '}
-                              </span>
-                            ))
-                          ) : (
-                            <span className="table-cell-content">
-                              {user.category ? user.category.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase()) : 'Other'}
-                            </span>
-                          )}
-                        </div>
+                        <CategoryList 
+                          categories={user.categories || user.category || []}
+                          maxVisible={2}
+                          compact={true}
+                          className="admin-table table-compact"
+                        />
                       </div>
                     </td>
                     <td>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
+import CategoryList from './CategoryList';
 import './AdminPanel.css';
 
 const AdminPanel = () => {
@@ -275,24 +276,40 @@ const AdminPanel = () => {
                   <table>
                     <thead>
                       <tr>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th>Company</th>
-                        <th>Status</th>
-                        <th>Joined</th>
-                        <th>Actions</th>
+                        <th>USER</th>
+                        <th>ROLE</th>
+                        <th>CATEGORY</th>
+                        <th>COMPANY</th>
+                        <th>STATUS</th>
+                        <th>JOINED</th>
+                        <th>ACTIONS</th>
                       </tr>
                     </thead>
                     <tbody>
                       {users.map(user => (
                         <tr key={user.id}>
-                          <td>{user.username || user.email}</td>
-                          <td>{user.email}</td>
+                          <td>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                              <div style={{ fontWeight: 'bold', fontSize: '14px' }}>
+                                {user.username || user.email?.split('@')[0] || 'N/A'}
+                              </div>
+                              <div style={{ fontSize: '12px', color: '#666', opacity: 0.8 }}>
+                                {user.email}
+                              </div>
+                            </div>
+                          </td>
                           <td>
                             <span className={`role-badge ${user.role}`}>
                               {user.role?.charAt(0).toUpperCase() + user.role?.slice(1)}
                             </span>
+                          </td>
+                          <td>
+                            <CategoryList 
+                              categories={user.categories || user.category || []}
+                              maxVisible={2}
+                              compact={true}
+                              className="admin-table table-compact"
+                            />
                           </td>
                           <td>{user.company_name || '-'}</td>
                           <td>
@@ -434,7 +451,14 @@ const AdminPanel = () => {
                       {tenders.map(tender => (
                         <tr key={tender.id}>
                           <td>{tender.title}</td>
-                          <td>{tender.category}</td>
+                          <td>
+                            <CategoryList 
+                              categories={tender.categories || tender.category || tender.category_name || 'Uncategorized'}
+                              maxVisible={2}
+                              compact={true}
+                              className="admin-table table-compact"
+                            />
+                          </td>
                           <td>${tender.budget?.toLocaleString() || 'N/A'}</td>
                           <td>
                             <span className={`status-badge ${tender.status || 'active'}`}>

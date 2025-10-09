@@ -23,6 +23,7 @@ class User {
     this.website = userData.website;
     this.reset_token = userData.reset_token;
     this.reset_token_expires = userData.reset_token_expires;
+    this.credential_expires_at = userData.credential_expires_at;
   }
 
   // Create user
@@ -33,11 +34,15 @@ class User {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
+    // Set credential expiry to 1 year from now
+    const credentialExpiresAt = new Date();
+    credentialExpiresAt.setFullYear(credentialExpiresAt.getFullYear() + 1);
+
     const result = await query(
-      `INSERT INTO users (email, username, password, company_name, phone, address, role, category)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+      `INSERT INTO users (email, username, password, company_name, phone, address, role, category, credential_expires_at)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
        RETURNING *`,
-      [email, username, hashedPassword, company_name, phone, address, role, category]
+      [email, username, hashedPassword, company_name, phone, address, role, category, credentialExpiresAt]
     );
 
     return new User(result.rows[0]);
@@ -218,6 +223,112 @@ class User {
     }
     
     return usersWithCategories;
+  }
+
+  // Check if user credentials are expired
+  isCredentialExpired() {
+    if (!this.credential_expires_at) {
+      return false; // If no expiry date set, consider as not expired
+    }
+    return new Date(this.credential_expires_at) <= new Date();
+  }
+
+  // Get days until credential expiry (negative if already expired)
+  getDaysUntilExpiry() {
+    if (!this.credential_expires_at) {
+      return null;
+    }
+    const now = new Date();
+    const expiryDate = new Date(this.credential_expires_at);
+    const diffTime = expiryDate - now;
+    return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  }
+
+  // Get credential expiry status
+  getCredentialStatus() {
+    if (!this.credential_expires_at) {
+      return { status: 'no_expiry', message: 'No expiry date set' };
+    }
+
+    const daysUntilExpiry = this.getDaysUntilExpiry();
+    
+    if (daysUntilExpiry <= 0) {
+      return { status: 'expired', message: 'Credentials have expired', daysUntilExpiry };
+    } else if (daysUntilExpiry <= 7) {
+      return { status: 'critical', message: 'Credentials expire within 7 days', daysUntilExpiry };
+    } else if (daysUntilExpiry <= 30) {
+      return { status: 'warning', message: 'Credentials expire within 30 days', daysUntilExpiry };
+    } else {
+      return { status: 'valid', message: 'Credentials are valid', daysUntilExpiry };
+    }
+  }
+
+  // Extend user credentials by 1 year
+  async extendCredentials() {
+    const newExpiryDate = new Date();
+    newExpiryDate.setFullYear(newExpiryDate.getFullYear() + 1);
+    
+    const result = await query(
+      `UPDATE users SET credential_expires_at = $1, updated_at = CURRENT_TIMESTAMP 
+       WHERE id = $2 RETURNING *`,
+      [newExpiryDate, this.id]
+    );
+    
+    if (result.rows.length > 0) {
+      this.credential_expires_at = result.rows[0].credential_expires_at;
+      this.updated_at = result.rows[0].updated_at;
+    }
+    
+    return this.credential_expires_at;
+  }
+
+  // Set specific credential expiry date
+  async setCredentialExpiry(expiryDate) {
+    const result = await query(
+      `UPDATE users SET credential_expires_at = $1, updated_at = CURRENT_TIMESTAMP 
+       WHERE id = $2 RETURNING *`,
+      [expiryDate, this.id]
+    );
+    
+    if (result.rows.length > 0) {
+      this.credential_expires_at = result.rows[0].credential_expires_at;
+      this.updated_at = result.rows[0].updated_at;
+    }
+    
+    return this.credential_expires_at;
+  }
+
+  // Static method to find users with expiring credentials
+  static async findUsersWithExpiringCredentials(days = 30) {
+    const result = await query(
+      `SELECT * FROM users 
+       WHERE credential_expires_at IS NOT NULL 
+       AND credential_expires_at <= CURRENT_TIMESTAMP + INTERVAL '${days} days'
+       ORDER BY credential_expires_at ASC`,
+      []
+    );
+    return result.rows.map(row => new User(row));
+  }
+
+  // Static method to find expired users
+  static async findExpiredUsers() {
+    const result = await query(
+      `SELECT * FROM users 
+       WHERE credential_expires_at IS NOT NULL 
+       AND credential_expires_at <= CURRENT_TIMESTAMP
+       ORDER BY credential_expires_at ASC`,
+      []
+    );
+    return result.rows.map(row => new User(row));
+  }
+
+  // Override toJSON to include credential status
+  async toJSONWithCredentialStatus() {
+    const userWithoutPassword = await this.toJSON();
+    userWithoutPassword.credentialStatus = this.getCredentialStatus();
+    userWithoutPassword.isCredentialExpired = this.isCredentialExpired();
+    userWithoutPassword.daysUntilExpiry = this.getDaysUntilExpiry();
+    return userWithoutPassword;
   }
 }
 

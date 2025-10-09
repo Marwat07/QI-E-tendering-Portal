@@ -147,6 +147,60 @@
   font-weight: 500;
   text-transform: capitalize;
   border: 1px solid rgba(255, 255, 255, 0.3);
+  margin-bottom: 0.5rem;
+}
+
+/* Credential Status Styles */
+.credential-status {
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.credential-status span {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.credential-expired {
+  background: rgba(239, 68, 68, 0.2) !important;
+  border-color: rgba(239, 68, 68, 0.3) !important;
+  color: #fee2e2 !important;
+  animation: pulse 2s infinite;
+}
+
+.credential-critical {
+  background: rgba(245, 158, 11, 0.2) !important;
+  border-color: rgba(245, 158, 11, 0.3) !important;
+  color: #fef3c7 !important;
+}
+
+.credential-warning {
+  background: rgba(234, 179, 8, 0.2) !important;
+  border-color: rgba(234, 179, 8, 0.3) !important;
+  color: #fefce8 !important;
+}
+
+.credential-valid {
+  background: rgba(34, 197, 94, 0.2) !important;
+  border-color: rgba(34, 197, 94, 0.3) !important;
+  color: #dcfce7 !important;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
 }
 
 /* Dropdown Divider */

@@ -21,6 +21,9 @@ const ProfileSettings = () => {
     new_password: '',
     confirm_password: ''
   });
+  // Credential status state (for vendor/supplier users)
+  const [credentialInfo, setCredentialInfo] = useState(null);
+  const [isCredLoading, setIsCredLoading] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -33,6 +36,28 @@ const ProfileSettings = () => {
         email: user.email || ''
       });
     }
+  }, [user]);
+
+  // Fetch credential status for vendor/supplier users
+  useEffect(() => {
+    const shouldFetch = user && (user.role === 'vendor' || user.role === 'supplier');
+    if (!shouldFetch) return;
+
+    const fetchCredentialStatus = async () => {
+      try {
+        setIsCredLoading(true);
+        const res = await apiService.get('/credentials/status');
+        // Expecting { success, data: { expiresAt, isExpired, daysUntilExpiry, credentialStatus } }
+        setCredentialInfo(res?.data || null);
+      } catch (err) {
+        console.warn('Failed to fetch credential status:', err?.message || err);
+        setCredentialInfo(null);
+      } finally {
+        setIsCredLoading(false);
+      }
+    };
+
+    fetchCredentialStatus();
   }, [user]);
 
   const handleInputChange = (e) => {
@@ -129,6 +154,19 @@ const ProfileSettings = () => {
       return user.email.charAt(0).toUpperCase();
     }
     return 'U';
+  };
+
+  const formatDate = (dateString) => {
+    if (!dateString) return '-';
+    try {
+      return new Date(dateString).toLocaleDateString('en-GB', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+      });
+    } catch (e) {
+      return String(dateString);
+    }
   };
 
   return (
@@ -260,6 +298,33 @@ const ProfileSettings = () => {
 
           {activeTab === 'security' && (
             <div className="tab-content">
+              {/* Credential info for vendor/supplier users */}
+              {user && (user.role === 'vendor' || user.role === 'supplier') && (
+                <div className="form-section">
+                  <h2>Credential Status</h2>
+                  {isCredLoading ? (
+                    <p>Loading credential status...</p>
+                  ) : credentialInfo ? (
+                    <div className="credential-info">
+                      {credentialInfo.isExpired ? (
+                        <p className="credential-expired">
+                          Your credentials expired on <strong>{formatDate(credentialInfo.expiresAt)}</strong>.
+                        </p>
+                      ) : credentialInfo.expiresAt ? (
+                        <p className={typeof credentialInfo.daysUntilExpiry === 'number' && credentialInfo.daysUntilExpiry <= 7 ? 'credential-warning' : 'credential-ok'}>
+                          Credentials expire on <strong>{formatDate(credentialInfo.expiresAt)}</strong>
+                          {typeof credentialInfo.daysUntilExpiry === 'number' ? ` (in ${credentialInfo.daysUntilExpiry} days)` : ''}.
+                        </p>
+                      ) : (
+                        <p>No credential expiry set.</p>
+                      )}
+                    </div>
+                  ) : (
+                    <p>Unable to load credential status.</p>
+                  )}
+                </div>
+              )}
+
               <form onSubmit={handlePasswordSubmit}>
                 <div className="form-section">
                   <h2>Change Password</h2>

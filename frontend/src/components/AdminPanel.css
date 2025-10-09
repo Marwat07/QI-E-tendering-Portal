@@ -498,38 +498,146 @@
   .admin-header-info p {
     font-size: 0.95rem;
   }
+}
 
-  .admin-content {
-    padding: 1rem;
-  }
+/* Enhanced Table Layout */
+.users-table table,
+.tenders-table table {
+  table-layout: fixed;
+}
 
-  .stat-card {
-    padding: 1rem;
-    gap: 0.75rem;
-  }
+/* Column Widths for Users Table */
+.users-table th:nth-child(1),
+.users-table td:nth-child(1) {
+  width: 20%; /* Name */
+}
 
-  .stat-icon {
-    width: 50px;
-    height: 50px;
-    font-size: 1.25rem;
-  }
+.users-table th:nth-child(2),
+.users-table td:nth-child(2) {
+  width: 25%; /* Email */
+}
 
-  .stat-value {
-    font-size: 1.5rem;
-  }
+.users-table th:nth-child(3),
+.users-table td:nth-child(3) {
+  width: 15%; /* Role */
+}
 
-  .users-table th,
-  .tenders-table th,
-  .users-table td,
-  .tenders-table td {
-    padding: 0.75rem;
-    font-size: 0.8rem;
-  }
+.users-table th:nth-child(4),
+.users-table td:nth-child(4) {
+  width: 25%; /* Categories */
+}
 
-  .settings-sections {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
+.users-table th:nth-child(5),
+.users-table td:nth-child(5) {
+  width: 15%; /* Status */
+}
+
+/* Column Widths for Tenders Table */
+.tenders-table th:nth-child(1),
+.tenders-table td:nth-child(1) {
+  width: 25%; /* Title */
+}
+
+.tenders-table th:nth-child(2),
+.tenders-table td:nth-child(2) {
+  width: 15%; /* Type */
+}
+
+.tenders-table th:nth-child(3),
+.tenders-table td:nth-child(3) {
+  width: 25%; /* Categories */
+}
+
+.tenders-table th:nth-child(4),
+.tenders-table td:nth-child(4) {
+  width: 15%; /* Status */
+}
+
+.tenders-table th:nth-child(5),
+.tenders-table td:nth-child(5) {
+  width: 20%; /* Created Date */
+}
+
+/* Cell alignment and wrapping */
+.users-table td,
+.tenders-table td {
+  vertical-align: top;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* CategoryList Component Styles */
+.category-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.category-item {
+  display: inline-block;
+  background: #f3f4f6;
+  color: #374151;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-right: 0.25rem;
+  margin-bottom: 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 120px;
+}
+
+.category-ellipsis {
+  color: #6b7280;
+  font-style: italic;
+  font-size: 0.75rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  background: #e5e7eb;
+  transition: background-color 0.2s ease;
+}
+
+.category-ellipsis:hover {
+  background: #d1d5db;
+}
+
+.categories-visible {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.categories-all {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.toggle-categories {
+  color: #667eea;
+  font-size: 0.75rem;
+  cursor: pointer;
+  text-decoration: underline;
+  background: none;
+  border: none;
+  padding: 0;
+  font-weight: 500;
+}
+
+.toggle-categories:hover {
+  color: #5a67d8;
+}
+
+/* Empty state for categories */
+.no-categories {
+  color: #9ca3af;
+  font-style: italic;
+  font-size: 0.75rem;
 }
 
 /* Modal Styles */

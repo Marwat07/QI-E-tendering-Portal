@@ -194,8 +194,16 @@ E-Tendering Portal Team
     }
   }
 
-  async sendWelcomeEmail(email) {
+  async sendWelcomeEmail(email, credentialExpiryDate = null) {
     try {
+      // Format expiry date for display
+      const expiryDateStr = credentialExpiryDate ? 
+        new Date(credentialExpiryDate).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        }) : null;
+
       const mailOptions = {
         from: process.env.FROM_EMAIL || 'scm@qaswaindustries.com',
         to: email,
@@ -216,6 +224,15 @@ E-Tendering Portal Team
               <p style="color: #666; line-height: 1.6;">
                 You can now log in and start participating in tenders or manage your tendering process.
               </p>
+              
+              ${expiryDateStr ? `
+                <div style="background: #e3f2fd; border: 1px solid #90caf9; padding: 15px; border-radius: 8px; margin: 20px 0;">
+                  <p style="margin: 0; color: #1565c0; font-size: 14px;">
+                    <strong>🔐 Account Security:</strong> Your credentials will expire on <strong>${expiryDateStr}</strong> (1 year from creation). 
+                    You will receive notifications before expiry, and administrators can extend your access when needed.
+                  </p>
+                </div>
+              ` : ''}
               
               <div style="text-align: center; margin: 30px 0;">
                 <a href="${process.env.FRONTEND_URL || 'http://localhost:5173'}/login" 
@@ -296,10 +313,18 @@ E-Tendering Portal Team
   }
 
   // Send user credentials via email
-  async sendUserCredentials(email, userDetails, credentials) {
+  async sendUserCredentials(email, userDetails, credentials, credentialExpiryDate = null) {
     try {
       const { role } = userDetails;
       const { username, password } = credentials;
+      
+      // Format expiry date for display
+      const expiryDateStr = credentialExpiryDate ? 
+        new Date(credentialExpiryDate).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        }) : null;
       
       const mailOptions = {
         from: process.env.FROM_EMAIL || 'scm@qaswaindustries.com',
@@ -316,7 +341,11 @@ Email: ${email}
 Username: ${username}
 Temporary Password: ${password}
 Role: ${role.charAt(0).toUpperCase() + role.slice(1)}
-
+${expiryDateStr ? `
+IMPORTANT - CREDENTIAL EXPIRY:
+Your credentials will expire on ${expiryDateStr} (1 year from creation).
+You will receive notifications before expiry, and administrators can extend your access when needed.
+` : ''}
 For security reasons, we strongly recommend changing your password after your first login.
 
 Login URL: ${process.env.FRONTEND_URL || 'http://localhost:5173'}/login
@@ -345,7 +374,17 @@ Qaswa Industries SCM Team
                 <p style="margin: 8px 0; color: #555;"><strong>Username:</strong> <span style="font-family: monospace; background: #e9ecef; padding: 2px 6px; border-radius: 3px;">${username}</span></p>
                 <p style="margin: 8px 0; color: #555;"><strong>Temporary Password:</strong> <span style="font-family: monospace; background: #e9ecef; padding: 2px 6px; border-radius: 3px;">${password}</span></p>
                 <p style="margin: 8px 0; color: #555;"><strong>Role:</strong> ${role.charAt(0).toUpperCase() + role.slice(1)}</p>
+                ${expiryDateStr ? `<p style="margin: 8px 0; color: #555;"><strong>Credentials Expire:</strong> <span style="color: #d73527; font-weight: 600;">${expiryDateStr}</span></p>` : ''}
               </div>
+              
+              ${expiryDateStr ? `
+                <div style="background: #fff8e1; border: 1px solid #ffcc02; padding: 15px; border-radius: 8px; margin: 20px 0;">
+                  <p style="margin: 0; color: #ff8f00; font-size: 14px;">
+                    <strong>⏰ Important - Credential Expiry:</strong> Your credentials will expire on <strong>${expiryDateStr}</strong> (1 year from creation). 
+                    You will receive notifications before expiry, and administrators can extend your access when needed.
+                  </p>
+                </div>
+              ` : ''}
               
               <div style="background: #fff3cd; border: 1px solid #ffeaa7; padding: 15px; border-radius: 8px; margin: 20px 0;">
                 <p style="margin: 0; color: #856404; font-size: 14px;">
@@ -472,6 +511,177 @@ Qaswa Industries SCM Team
       logger.error(`Failed to send account ${approved ? 'approval' : 'status'} email:`, error);
       throw new Error(`Failed to send account ${approved ? 'approval' : 'status'} email`);
     }
+  }
+
+  // Send credential expiry notification
+  async sendCredentialExpiryNotification(email, userDetails, daysUntilExpiry) {
+    try {
+      const { username, company_name } = userDetails;
+      const isUrgent = daysUntilExpiry <= 7;
+      const isCritical = daysUntilExpiry <= 3;
+      
+      let urgencyColor, urgencyIcon, urgencyText;
+      if (isCritical) {
+        urgencyColor = '#d73527';
+        urgencyIcon = '😨';
+        urgencyText = 'URGENT';
+      } else if (isUrgent) {
+        urgencyColor = '#ff8f00';
+        urgencyIcon = '⚠️';
+        urgencyText = 'URGENT';
+      } else {
+        urgencyColor = '#1976d2';
+        urgencyIcon = '🔔';
+        urgencyText = 'NOTICE';
+      }
+      
+      const subject = `${urgencyText}: Your E-Tendering Portal Credentials Expire in ${daysUntilExpiry} Day${daysUntilExpiry === 1 ? '' : 's'}`;
+      
+      const mailOptions = {
+        from: process.env.FROM_EMAIL || 'scm@qaswaindustries.com',
+        to: email,
+        subject: subject,
+        text: `
+Credential Expiry Notification - E-Tendering Portal
+
+Dear User,
+
+This is an ${urgencyText} notification that your E-Tendering Portal credentials will expire in ${daysUntilExpiry} day${daysUntilExpiry === 1 ? '' : 's'}.
+
+Account Details:
+Email: ${email}
+${username ? `Username: ${username}\n` : ''}${company_name ? `Company: ${company_name}\n` : ''}
+Days Until Expiry: ${daysUntilExpiry}
+
+IMPORTANT:
+- Your access will be automatically disabled when credentials expire
+- Contact your system administrator to extend your credentials
+- You will receive ${isCritical ? 'final' : isUrgent ? 'additional' : 'more'} notifications as the expiry date approaches
+
+To avoid service interruption, please contact your administrator immediately.
+
+If you have already contacted administration or believe this is an error, please disregard this message.
+
+Best regards,
+Qaswa Industries SCM Team
+        `,
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+            <div style="background: linear-gradient(135deg, ${urgencyColor} 0%, ${urgencyColor}dd 100%); padding: 20px; border-radius: 10px 10px 0 0;">
+              <h1 style="color: white; text-align: center; margin: 0;">${urgencyIcon} Credential Expiry ${urgencyText}</h1>
+            </div>
+            
+            <div style="background: white; padding: 30px; border: 1px solid #e1e5e9; border-radius: 0 0 10px 10px;">
+              <h2 style="color: #333; margin-bottom: 20px;">Dear User,</h2>
+              
+              <div style="background: ${isCritical ? '#ffebee' : isUrgent ? '#fff8e1' : '#e3f2fd'}; border: 1px solid ${isCritical ? '#f44336' : isUrgent ? '#ffcc02' : '#2196f3'}; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                <h3 style="color: ${urgencyColor}; margin-top: 0; margin-bottom: 10px;">${urgencyIcon} Credentials Expiring Soon!</h3>
+                <p style="margin: 0; color: ${isCritical ? '#c62828' : isUrgent ? '#e65100' : '#1565c0'}; font-size: 16px; font-weight: 600;">
+                  Your E-Tendering Portal credentials will expire in <strong>${daysUntilExpiry} day${daysUntilExpiry === 1 ? '' : 's'}</strong>.
+                </p>
+              </div>
+              
+              <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 25px 0;">
+                <h3 style="color: #333; margin-top: 0; margin-bottom: 15px;">📝 Account Details</h3>
+                <p style="margin: 8px 0; color: #555;"><strong>Email:</strong> ${email}</p>
+                ${username ? `<p style="margin: 8px 0; color: #555;"><strong>Username:</strong> ${username}</p>` : ''}
+                ${company_name ? `<p style="margin: 8px 0; color: #555;"><strong>Company:</strong> ${company_name}</p>` : ''}
+                <p style="margin: 8px 0; color: #555;"><strong>Days Until Expiry:</strong> <span style="color: ${urgencyColor}; font-weight: 600;">${daysUntilExpiry}</span></p>
+              </div>
+              
+              <div style="background: #fff3cd; border: 1px solid #ffeaa7; padding: 15px; border-radius: 8px; margin: 20px 0;">
+                <h4 style="color: #856404; margin-top: 0; margin-bottom: 10px;">⚠️ Important Actions Required:</h4>
+                <ul style="color: #856404; margin: 0; padding-left: 20px;">
+                  <li>Your access will be <strong>automatically disabled</strong> when credentials expire</li>
+                  <li><strong>Contact your system administrator</strong> to extend your credentials</li>
+                  <li>You will receive ${isCritical ? 'final' : isUrgent ? 'additional' : 'more'} notifications as the expiry date approaches</li>
+                </ul>
+              </div>
+              
+              <div style="background: #d4edda; border: 1px solid #c3e6cb; padding: 15px; border-radius: 8px; margin: 20px 0;">
+                <p style="margin: 0; color: #155724; font-size: 14px;">
+                  <strong>📞 To avoid service interruption:</strong> Please contact your administrator immediately to extend your credentials.
+                </p>
+              </div>
+              
+              <p style="color: #666; line-height: 1.6; font-size: 14px;">
+                If you have already contacted administration or believe this is an error, please disregard this message.
+              </p>
+              
+              <hr style="border: none; border-top: 1px solid #e1e5e9; margin: 25px 0;">
+              
+              <p style="color: #999; font-size: 12px; text-align: center;">
+                This is an automated notification. Please do not reply to this email.<br>
+                Best regards,<br>
+                Qaswa Industries SCM Team
+              </p>
+            </div>
+          </div>
+        `
+      };
+
+      const result = await this.transporter.sendMail(mailOptions);
+      
+      logger.info(`Credential expiry notification sent to ${email} (${daysUntilExpiry} days remaining)`, {
+        messageId: result.messageId,
+        urgency: urgencyText
+      });
+
+      return {
+        success: true,
+        messageId: result.messageId,
+        urgency: urgencyText
+      };
+    } catch (error) {
+      logger.error('Failed to send credential expiry notification:', error);
+      throw new Error('Failed to send credential expiry notification');
+    }
+  }
+
+  // Send bulk credential expiry notifications
+  async sendBulkCredentialExpiryNotifications(users) {
+    const results = [];
+    const errors = [];
+    
+    for (const user of users) {
+      try {
+        const daysUntilExpiry = Math.ceil((new Date(user.credential_expires_at) - new Date()) / (1000 * 60 * 60 * 24));
+        
+        if (daysUntilExpiry > 0) {
+          const result = await this.sendCredentialExpiryNotification(
+            user.email, 
+            {
+              username: user.username,
+              company_name: user.company_name
+            },
+            daysUntilExpiry
+          );
+          
+          results.push({
+            email: user.email,
+            daysUntilExpiry,
+            messageId: result.messageId,
+            urgency: result.urgency,
+            success: true
+          });
+        }
+      } catch (error) {
+        errors.push({
+          email: user.email,
+          error: error.message
+        });
+      }
+    }
+    
+    logger.info(`Bulk credential expiry notifications completed. Success: ${results.length}, Errors: ${errors.length}`);
+    
+    return {
+      successful: results,
+      errors: errors,
+      totalProcessed: users.length,
+      successCount: results.length,
+      errorCount: errors.length
+    };
   }
 }
 

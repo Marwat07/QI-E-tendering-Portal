@@ -767,3 +767,18 @@
     transform: rotate(360deg);
   }
 }
+
+/* Captcha styles */
+.register-container .captcha-box {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.register-container .captcha-input {
+  max-width: 200px;
+}
+
+.register-container .refresh-captcha {
+  padding: 0.5rem 0.75rem;
+}

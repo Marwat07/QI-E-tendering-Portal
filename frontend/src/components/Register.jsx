@@ -37,8 +37,19 @@ const Register = () => {
     }
   });
 
+  // Simple math captcha to prevent bots
+  const [captcha, setCaptcha] = useState({ a: 0, b: 0 });
+  const [captchaAnswer, setCaptchaAnswer] = useState('');
+
+  const generateCaptcha = () => {
+    const a = Math.floor(Math.random() * 9) + 1; // 1-9
+    const b = Math.floor(Math.random() * 50) + 1; // 1-50
+    setCaptcha({ a, b });
+  };
+
   useEffect(() => {
     fetchCategories();
+    generateCaptcha();
   }, []);
 
   const fetchCategories = async () => {
@@ -112,6 +123,13 @@ const Register = () => {
     
     try {
       setLoading(true);
+      
+      // Simple captcha validation
+      if (Number(captchaAnswer) !== captcha.a + captcha.b) {
+        toast.error('Please solve the verification question correctly');
+        generateCaptcha();
+        return;
+      }
       
       // Validation
       if (!formData.email || !formData.company_name || !formData.phone) {
@@ -448,6 +466,28 @@ const Register = () => {
                   <p><strong>Note:</strong> All pages of registration form and related documents must be signed and stamped by the authorized signatory</p>
                   <p><strong>Note:</strong> Please submit in original through registered mail / courier</p>
                 </div>
+              </div>
+            </div>
+
+            {/* Human verification */}
+            <div className="form-section">
+              <h3 className="section-title">Answer</h3>
+              <div className="captcha-box">
+                <label className="form-label" htmlFor="captchaAnswer">
+                  What is {captcha.a} + {captcha.b} =
+                </label>
+                <input
+                  id="captchaAnswer"
+                  type="number"
+                  className="form-input captcha-input"
+                  placeholder="Enter answer"
+                  value={captchaAnswer}
+                  onChange={(e) => setCaptchaAnswer(e.target.value)}
+                  required
+                />
+                <button type="button" className="btn btn-secondary refresh-captcha" onClick={generateCaptcha}>
+                  Refresh
+                </button>
               </div>
             </div>
 

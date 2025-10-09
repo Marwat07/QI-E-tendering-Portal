@@ -1,0 +1,160 @@
+/* CategoryList Component Styles */
+
+.category-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.category-list.compact {
+  gap: 1px;
+}
+
+.category-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+}
+
+.category-list.compact .category-items {
+  gap: 2px;
+}
+
+/* Individual category styles */
+.category-item {
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Badge style (default) */
+.category-badge {
+  background: #e3f2fd;
+  color: #1976d2;
+  padding: 2px 8px;
+  border-radius: 12px;
+  border: 1px solid #bbdefb;
+  transition: all 0.2s ease;
+}
+
+.category-badge:hover {
+  background: #bbdefb;
+  transform: translateY(-1px);
+}
+
+/* Button style */
+.category-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: none;
+  transition: all 0.2s ease;
+  cursor: default;
+  box-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
+}
+
+.category-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.4);
+}
+
+.category-button.single {
+  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+  box-shadow: 0 2px 4px rgba(76, 175, 80, 0.3);
+}
+
+/* More/Less buttons */
+.category-more,
+.category-less {
+  color: #1976d2;
+  background: transparent;
+  border: 1px dashed #1976d2;
+  padding: 2px 6px;
+  border-radius: 8px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.category-more:hover,
+.category-less:hover {
+  background: #e3f2fd;
+  border-style: solid;
+  transform: translateY(-1px);
+}
+
+/* Single category styles */
+.category-single {
+  display: inline-block;
+}
+
+/* No categories */
+.category-none {
+  color: #9e9e9e;
+  font-style: italic;
+  font-size: 12px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .category-item {
+    max-width: 80px;
+    font-size: 11px;
+  }
+  
+  .category-badge,
+  .category-button {
+    padding: 2px 6px;
+  }
+  
+  .category-more,
+  .category-less {
+    font-size: 10px;
+    padding: 1px 4px;
+  }
+}
+
+/* Admin table specific styles */
+.admin-table .category-list .category-badge {
+  background: #f0f9ff;
+  color: #0369a1;
+  border: 1px solid #bae6fd;
+}
+
+.admin-table .category-list .category-badge:hover {
+  background: #bae6fd;
+}
+
+/* Tender table specific styles */
+.tender-table .category-list .category-badge {
+  background: #f3e8ff;
+  color: #7c3aed;
+  border: 1px solid #d8b4fe;
+}
+
+.tender-table .category-list .category-badge:hover {
+  background: #d8b4fe;
+}
+
+/* Compact version for tables */
+.category-list.table-compact {
+  max-width: 200px;
+}
+
+.category-list.table-compact .category-item {
+  max-width: 90px;
+  font-size: 11px;
+}
+
+.category-list.table-compact .category-more,
+.category-list.table-compact .category-less {
+  font-size: 10px;
+}

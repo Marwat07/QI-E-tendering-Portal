@@ -7712,3 +7712,74 @@
 {"level":"info","message":"Email service connected successfully","service":"etendering-backend","timestamp":"2025-10-06T14:07:26.435Z"}
 {"level":"info","message":"User logged in: mt123321123123@admin.com","service":"etendering-backend","timestamp":"2025-10-06T14:47:53.839Z"}
 {"level":"info","message":"SIGINT received, shutting down gracefully","service":"etendering-backend","timestamp":"2025-10-06T15:41:55.024Z"}
+{"level":"info","message":"Server running on port 3001 in development mode","service":"etendering-backend","timestamp":"2025-10-07T14:33:14.438Z"}
+{"level":"info","message":"Email service connected successfully","service":"etendering-backend","timestamp":"2025-10-07T14:33:16.083Z"}
+{"level":"info","message":"User logged in: mt123321123123@admin.com","service":"etendering-backend","timestamp":"2025-10-07T14:43:34.306Z"}
+{"level":"info","message":"Server running on port 3001 in development mode","service":"etendering-backend","timestamp":"2025-10-07T15:49:09.001Z"}
+{"level":"info","message":"Email service connected successfully","service":"etendering-backend","timestamp":"2025-10-07T15:49:10.599Z"}
+{"level":"info","message":"User logged in: mt123321123123@admin.com","service":"etendering-backend","timestamp":"2025-10-07T15:50:06.203Z"}
+{"level":"info","message":"Server running on port 3001 in development mode","service":"etendering-backend","timestamp":"2025-10-07T15:56:37.667Z"}
+{"level":"info","message":"Email service connected successfully","service":"etendering-backend","timestamp":"2025-10-07T15:56:39.105Z"}
+{"level":"info","message":"Server running on port 3001 in development mode","service":"etendering-backend","timestamp":"2025-10-07T15:59:41.977Z"}
+{"level":"info","message":"Email service connected successfully","service":"etendering-backend","timestamp":"2025-10-07T15:59:43.992Z"}
+{"level":"info","message":"New user registered: haroonlambo274@gmail.com","service":"etendering-backend","timestamp":"2025-10-07T16:02:59.915Z"}
+{"level":"info","message":"User credentials email sent to haroonlambo274@gmail.com","messageId":"<ff9a5a19-99dc-69c7-3e47-2390ccf510b6@gmail.com>","service":"etendering-backend","timestamp":"2025-10-07T16:03:04.190Z","username":"ETU8U979615"}
+{"level":"info","message":"User logged in: ETU8U979615","service":"etendering-backend","timestamp":"2025-10-07T16:03:48.201Z"}
+{"level":"info","message":"User logged in: mt123321123123@admin.com","service":"etendering-backend","timestamp":"2025-10-07T16:24:20.897Z"}
+{"level":"info","message":"SIGINT received, shutting down gracefully","service":"etendering-backend","timestamp":"2025-10-07T16:51:20.994Z"}
+{"level":"info","message":"Server running on port 3001 in development mode","service":"etendering-backend","timestamp":"2025-10-08T16:06:06.881Z"}
+{"level":"info","message":"Email service connected successfully","service":"etendering-backend","timestamp":"2025-10-08T16:06:08.277Z"}
+{"level":"info","message":"Server running on port 3001 in development mode","service":"etendering-backend","timestamp":"2025-10-08T16:47:22.544Z"}
+{"level":"info","message":"Email service connected successfully","service":"etendering-backend","timestamp":"2025-10-08T16:47:24.014Z"}
+{"level":"info","message":"Server running on port 3001 in development mode","service":"etendering-backend","timestamp":"2025-10-08T16:47:37.457Z"}
+{"level":"info","message":"Email service connected successfully","service":"etendering-backend","timestamp":"2025-10-08T16:47:38.986Z"}
+{"level":"info","message":"Server running on port 3001 in development mode","service":"etendering-backend","timestamp":"2025-10-08T16:48:08.677Z"}
+{"level":"info","message":"Email service connected successfully","service":"etendering-backend","timestamp":"2025-10-08T16:48:10.893Z"}
+{"level":"info","message":"Server running on port 3001 in development mode","service":"etendering-backend","timestamp":"2025-10-08T16:48:33.504Z"}
+{"level":"info","message":"Email service connected successfully","service":"etendering-backend","timestamp":"2025-10-08T16:48:35.079Z"}
+{"level":"info","message":"Server running on port 3001 in development mode","service":"etendering-backend","timestamp":"2025-10-08T16:48:53.988Z"}
+{"level":"info","message":"Email service connected successfully","service":"etendering-backend","timestamp":"2025-10-08T16:48:55.445Z"}
+{"level":"info","message":"Server running on port 3001 in development mode","service":"etendering-backend","timestamp":"2025-10-08T16:49:28.020Z"}
+{"level":"info","message":"Email service connected successfully","service":"etendering-backend","timestamp":"2025-10-08T16:49:29.607Z"}
+{"level":"info","message":"Server running on port 3001 in development mode","service":"etendering-backend","timestamp":"2025-10-08T17:08:01.952Z"}
+{"level":"info","message":"Email service connected successfully","service":"etendering-backend","timestamp":"2025-10-08T17:08:03.265Z"}
+{"level":"info","message":"Server running on port 3001 in development mode","service":"etendering-backend","timestamp":"2025-10-08T17:08:28.318Z"}
+{"level":"info","message":"Email service connected successfully","service":"etendering-backend","timestamp":"2025-10-08T17:08:29.554Z"}
+{"level":"info","message":"User logged in: mt123321123123@admin.com","service":"etendering-backend","timestamp":"2025-10-08T17:08:45.921Z"}
+{"level":"info","message":"SIGINT received, shutting down gracefully","service":"etendering-backend","timestamp":"2025-10-08T17:09:20.352Z"}
+{"level":"info","message":"SIGINT received, shutting down gracefully","service":"etendering-backend","timestamp":"2025-10-08T17:09:32.255Z"}
+{"level":"info","message":"SIGINT received, shutting down gracefully","service":"etendering-backend","timestamp":"2025-10-08T17:09:33.375Z"}
+{"level":"info","message":"SIGINT received, shutting down gracefully","service":"etendering-backend","timestamp":"2025-10-08T17:09:46.768Z"}
+{"level":"info","message":"Server running on port 3001 in development mode","service":"etendering-backend","timestamp":"2025-10-08T17:10:20.489Z"}
+{"level":"info","message":"Email service connected successfully","service":"etendering-backend","timestamp":"2025-10-08T17:10:21.766Z"}
+{"level":"info","message":"Process terminated","service":"etendering-backend","timestamp":"2025-10-08T17:10:27.488Z"}
+{"level":"info","message":"User logged in: mt123321123123@admin.com","service":"etendering-backend","timestamp":"2025-10-08T17:10:45.281Z"}
+{"level":"info","message":"User logged in: mt123321123123@admin.com","service":"etendering-backend","timestamp":"2025-10-08T17:11:39.540Z"}
+{"level":"info","message":"Server running on port 3001 in development mode","service":"etendering-backend","timestamp":"2025-10-08T17:12:32.717Z"}
+{"level":"info","message":"Email service connected successfully","service":"etendering-backend","timestamp":"2025-10-08T17:12:34.374Z"}
+{"level":"info","message":"User logged in: mt123321123123@admin.com","service":"etendering-backend","timestamp":"2025-10-08T17:13:12.523Z"}
+{"level":"info","message":"User logged in: mt123321123123@gmail.com","service":"etendering-backend","timestamp":"2025-10-08T17:14:37.871Z"}
+{"level":"info","message":"User logged in: mt123321123123@admin.com","service":"etendering-backend","timestamp":"2025-10-08T17:15:56.896Z"}
+{"level":"info","message":"SIGINT received, shutting down gracefully","service":"etendering-backend","timestamp":"2025-10-08T17:18:34.856Z"}
+{"level":"info","message":"Server running on port 3001 in development mode","service":"etendering-backend","timestamp":"2025-10-09T09:44:28.560Z"}
+{"level":"info","message":"Email service connected successfully","service":"etendering-backend","timestamp":"2025-10-09T09:44:30.228Z"}
+{"level":"info","message":"New user registered: shahgg3432@gmail.com","service":"etendering-backend","timestamp":"2025-10-09T09:45:53.305Z"}
+{"level":"info","message":"User credentials email sent to shahgg3432@gmail.com","messageId":"<aeecfd94-5c18-6cf1-b4b7-99aef14a6a8d@gmail.com>","service":"etendering-backend","timestamp":"2025-10-09T09:45:55.754Z","username":"ETU2Z153032"}
+{"level":"info","message":"User logged in: ETU2Z153032","service":"etendering-backend","timestamp":"2025-10-09T09:46:48.064Z"}
+{"level":"info","message":"Password changed for user: shahgg3432@gmail.com","service":"etendering-backend","timestamp":"2025-10-09T09:48:32.107Z"}
+{"level":"info","message":"User logged in: shahgg3432@gmail.com","service":"etendering-backend","timestamp":"2025-10-09T09:48:56.572Z"}
+{"level":"info","message":"SIGINT received, shutting down gracefully","service":"etendering-backend","timestamp":"2025-10-09T09:51:25.706Z"}
+{"level":"info","message":"Server running on port 3001 in development mode","service":"etendering-backend","timestamp":"2025-10-09T09:51:43.438Z"}
+{"level":"info","message":"Email service connected successfully","service":"etendering-backend","timestamp":"2025-10-09T09:51:44.746Z"}
+{"level":"info","message":"User logged in: shahgg3432@gmail.com","service":"etendering-backend","timestamp":"2025-10-09T09:51:47.838Z"}
+{"level":"info","message":"User logged in: mt123321123123@admin.com","service":"etendering-backend","timestamp":"2025-10-09T09:54:41.897Z"}
+{"level":"info","message":"User logged in: shahgg3432@gmail.com","service":"etendering-backend","timestamp":"2025-10-09T10:09:28.009Z"}
+{"level":"info","message":"Server running on port 3001 in development mode","service":"etendering-backend","timestamp":"2025-10-09T13:08:30.088Z"}
+{"level":"info","message":"Email service connected successfully","service":"etendering-backend","timestamp":"2025-10-09T13:08:31.695Z"}
+{"level":"info","message":"User logged in: mt123321123123@admin.com","service":"etendering-backend","timestamp":"2025-10-09T13:08:51.936Z"}
+{"level":"info","message":"User logged in: shahgg3432@gmail.com","service":"etendering-backend","timestamp":"2025-10-09T13:22:41.823Z"}
+{"level":"info","message":"Server running on port 3001 in development mode","service":"etendering-backend","timestamp":"2025-10-09T13:38:52.697Z"}
+{"level":"info","message":"Email service connected successfully","service":"etendering-backend","timestamp":"2025-10-09T13:38:54.125Z"}
+{"level":"info","message":"User logged in: mt123321123123@admin.com","service":"etendering-backend","timestamp":"2025-10-09T13:41:32.701Z"}
+{"level":"info","message":"User logged in: shahgg3432@gmail.com","service":"etendering-backend","timestamp":"2025-10-09T13:54:38.155Z"}
+{"level":"info","message":"Server running on port 3001 in development mode","service":"etendering-backend","timestamp":"2025-10-09T14:18:52.248Z"}

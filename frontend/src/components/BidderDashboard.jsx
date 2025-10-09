@@ -43,8 +43,15 @@ const BidderDashboard = () => {
       let tendersResponse, bidsResponse, statsResponse;
       
       try {
-        console.log('Fetching tenders...');
-        tendersResponse = await apiService.get('/tenders', { active_only: true, limit: 6 });
+        console.log('Fetching tenders filtered by user categories...');
+        // For vendors/suppliers, fetch tenders that match their selected categories
+        try {
+          tendersResponse = await apiService.get('/tenders/my-category', { page: 1, limit: 6, search: '' });
+        } catch (catErr) {
+          console.warn('Category-filtered tenders endpoint failed, falling back to generic list:', catErr.message);
+          // Fallback to generic active tenders
+          tendersResponse = await apiService.get('/tenders', { active_only: true, limit: 6 });
+        }
         console.log('Tenders response:', tendersResponse);
       } catch (err) {
         console.error('Tenders fetch failed:', err);

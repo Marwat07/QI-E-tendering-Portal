@@ -1,6 +1,7 @@
 const { validationResult } = require('express-validator');
 const User = require('../models/User');
 const logger = require('../utils/logger');
+const emailService = require('../services/emailService');
 
 
 // Register user
@@ -16,7 +17,21 @@ const register = async (req, res, next) => {
       });
     }
 
-    const { email, password, first_name, last_name, company_name, phone, address, role } = req.body;
+    const {
+      email,
+      password,
+      first_name,
+      last_name,
+      company_name,
+      phone,
+      address,
+      role,
+      username: providedUsername,
+      categories: providedCategories = [],
+      category: singleCategory,
+      tax_number,
+      registration_number
+    } = req.body;
 
     // Check if user already exists
     const existingUser = await User.findByEmail(email);
@@ -27,19 +42,57 @@ const register = async (req, res, next) => {
       });
     }
 
-    // Create user
-    const user = await User.create({
+    // Determine credentials (auto-generate if missing)
+    let username = providedUsername || null;
+    let finalPassword = password || null;
+    let generatedCredentials = false;
+
+    if (!username || !finalPassword) {
+      const creds = emailService.generateCredentials(email);
+      username = username || creds.username;
+      finalPassword = finalPassword || creds.password;
+      generatedCredentials = true;
+    }
+
+    // Normalize categories input
+    const categories = Array.isArray(providedCategories) && providedCategories.length > 0
+      ? providedCategories
+      : (singleCategory ? [singleCategory] : []);
+
+    // Create user with categories (keeps first category in main users table for backward compat)
+    const user = await User.createWithCategories({
       email,
-      password,
+      username,
+      password: finalPassword,
       first_name,
       last_name,
       company_name,
       phone,
       address,
-      role: role || 'supplier'
-    });
+      role: role || 'supplier',
+      category: categories[0] || singleCategory || null,
+      tax_number: tax_number || null,
+      registration_number: registration_number || null
+    }, categories);
 
     logger.info(`New user registered: ${email}`);
+
+    // Optionally send credentials if we generated them
+    if (generatedCredentials) {
+      try {
+        await emailService.sendUserCredentials(email, { role: role || 'supplier' }, { username, password: finalPassword }, user.credential_expires_at);
+      } catch (emailErr) {
+        logger.warn(`Failed to send credentials email to ${email}: ${emailErr.message}`);
+        // Do not fail registration if email sending fails
+      }
+    } else {
+      // Send welcome email when user supplied their own password
+      try {
+        await emailService.sendWelcomeEmail(email, user.credential_expires_at);
+      } catch (emailErr) {
+        logger.warn(`Failed to send welcome email to ${email}: ${emailErr.message}`);
+      }
+    }
 
     // Generate token
     const token = user.generateToken();
@@ -49,7 +102,9 @@ const register = async (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      message: 'User registered successfully',
+      message: generatedCredentials
+        ? 'Registration successful! Your login credentials have been sent to your email.'
+        : 'User registered successfully',
       data: {
         token,
         user: safeUser
@@ -97,13 +152,22 @@ const login = async (req, res, next) => {
       });
     }
 
+    // Check if credentials are expired
+    if (user.isCredentialExpired()) {
+      return res.status(401).json({
+        success: false,
+        message: 'Your credentials have expired. Please contact an administrator to renew your access.',
+        expired: true
+      });
+    }
+
     logger.info(`User logged in: ${email}`);
 
     // Generate token
     const token = user.generateToken();
 
-    // Ensure we include full user fields; toJSON is async
-    const safeUser = await user.toJSON();
+    // Ensure we include full user fields with credential status; toJSON is async
+    const safeUser = await user.toJSONWithCredentialStatus();
 
     res.json({
       success: true,
@@ -121,7 +185,7 @@ const login = async (req, res, next) => {
 // Get current user profile
 const getProfile = async (req, res, next) => {
   try {
-    const safeUser = await req.user.toJSON();
+    const safeUser = await req.user.toJSONWithCredentialStatus();
 
     res.json({
       success: true,

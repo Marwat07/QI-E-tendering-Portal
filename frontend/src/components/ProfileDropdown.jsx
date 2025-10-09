@@ -129,6 +129,22 @@ const ProfileDropdown = () => {
               <div className="user-role-badge">
                 {user.role?.charAt(0).toUpperCase() + user.role?.slice(1) || 'User'}
               </div>
+              {user.credentialStatus && (
+                <div className={`credential-status ${user.credentialStatus.status}`}>
+                  {user.credentialStatus.status === 'expired' && (
+                    <span className="credential-expired">🔴 Credentials Expired</span>
+                  )}
+                  {user.credentialStatus.status === 'critical' && (
+                    <span className="credential-critical">🟠 Expires in {user.daysUntilExpiry} days</span>
+                  )}
+                  {user.credentialStatus.status === 'warning' && (
+                    <span className="credential-warning">🟡 Expires in {user.daysUntilExpiry} days</span>
+                  )}
+                  {user.credentialStatus.status === 'valid' && user.daysUntilExpiry < 90 && (
+                    <span className="credential-valid">🟢 Valid ({user.daysUntilExpiry} days left)</span>
+                  )}
+                </div>
+              )}
             </div>
           </div>
 

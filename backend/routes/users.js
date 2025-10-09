@@ -22,10 +22,23 @@ const getUsers = async (req, res, next) => {
 
     const users = await User.findAll(filters);
 
+    // Get users with credential status for admin
+    const usersWithCredentialStatus = await Promise.all(
+      users.map(async (user) => {
+        try {
+          return await user.toJSONWithCredentialStatus();
+        } catch (error) {
+          console.error('Error getting credential status for user:', user.id, error);
+          // Fallback to regular toJSON if credential status fails
+          return user.toJSON();
+        }
+      })
+    );
+
     res.json({
       success: true,
       data: {
-        users: users.map(user => user.toJSON()),
+        users: usersWithCredentialStatus,
         pagination: {
           page: parseInt(page),
           limit: parseInt(limit),
@@ -50,9 +63,12 @@ const getUser = async (req, res, next) => {
       });
     }
 
+    // Include credential status for admin viewing
+    const userWithCredentialStatus = await user.toJSONWithCredentialStatus();
+    
     res.json({
       success: true,
-      data: { user: user.toJSON() }
+      data: { user: userWithCredentialStatus }
     });
   } catch (error) {
     next(error);
@@ -95,10 +111,13 @@ const updateUser = async (req, res, next) => {
     
     logger.info(`User updated: ${user.email} by ${req.user.email}`);
 
+    // Return user with credential status after update
+    const userWithCredentialStatus = await updatedUser.toJSONWithCredentialStatus();
+    
     res.json({
       success: true,
       message: 'User updated successfully',
-      data: { user: updatedUser.toJSON() }
+      data: { user: userWithCredentialStatus }
     });
   } catch (error) {
     next(error);
