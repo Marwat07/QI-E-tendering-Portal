@@ -7783,3 +7783,9 @@
 {"level":"info","message":"User logged in: mt123321123123@admin.com","service":"etendering-backend","timestamp":"2025-10-09T13:41:32.701Z"}
 {"level":"info","message":"User logged in: shahgg3432@gmail.com","service":"etendering-backend","timestamp":"2025-10-09T13:54:38.155Z"}
 {"level":"info","message":"Server running on port 3001 in development mode","service":"etendering-backend","timestamp":"2025-10-09T14:18:52.248Z"}
+{"level":"info","message":"Server running on port 3001 in development mode","service":"etendering-backend","timestamp":"2025-10-10T04:35:53.969Z"}
+{"level":"info","message":"Email service connected successfully","service":"etendering-backend","timestamp":"2025-10-10T04:35:57.407Z"}
+{"level":"info","message":"New user registered: usmaalice5@gmail.com","service":"etendering-backend","timestamp":"2025-10-10T04:41:58.951Z"}
+{"level":"info","message":"User credentials email sent to usmaalice5@gmail.com","messageId":"<2fce2e92-9d24-5f2a-5ea7-00b70b52a237@gmail.com>","service":"etendering-backend","timestamp":"2025-10-10T04:42:02.812Z","username":"ETUFW318740"}
+{"level":"info","message":"User logged in: mt123321123123@admin.com","service":"etendering-backend","timestamp":"2025-10-10T06:14:23.038Z"}
+{"level":"info","message":"User logged in: shahgg3432@gmail.com","service":"etendering-backend","timestamp":"2025-10-10T06:19:36.193Z"}
